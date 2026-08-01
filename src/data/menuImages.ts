@@ -2,10 +2,12 @@
  * Mapeamento de imagens da pasta /public/imagens para os menus do simulador.
  * Adicione novas entradas conforme incluir mais capturas de tela.
  */
-const IMAGES_BASE = '/imagens';
+const IMAGES_BASE = `${import.meta.env.BASE_URL}imagens`;
 
 function imagePath(filename: string): string {
-  return `${IMAGES_BASE}/${filename}`; // URL doesn't need encodeURIComponent if it's correct but let's keep it safe or avoid it for spaces if Vite handles it. Vite development server handles spaces just fine in public paths.
+  // Encode spaces and special characters in the filename for safe URL usage
+  const safeName = encodeURI(filename);
+  return `${IMAGES_BASE}/${safeName}`;
 }
 
 /** Imagens por ID do item de menu */
