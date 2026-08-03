@@ -14,17 +14,8 @@ export function EmptyState({ item, modelLabel }: EmptyStateProps) {
       </div>
       <h3 className="text-lg font-semibold text-navy mb-2">{item.label}</h3>
       <p className="text-secondary text-sm max-w-sm leading-relaxed mb-6">
-        Documentação em desenvolvimento.
-        <br />
-        Esta opção pertence ao menu da{' '}
-        <span className="font-medium text-primary">{modelLabel}</span>.
-        <br />
-        Em breve serão adicionadas instruções detalhadas.
+        Não há informações adicionais para este item.
       </p>
-      <div className="flex items-center gap-2 px-4 py-2 bg-gray-50 border border-gray-200 rounded-lg text-xs text-secondary">
-        <Sparkles size={12} className="text-primary" />
-        Conteúdo será adicionado em breve
-      </div>
     </div>
   );
 }

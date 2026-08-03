@@ -1,4 +1,5 @@
-import { Cpu } from 'lucide-react';
+import { Cpu, X } from 'lucide-react';
+import { clsx } from 'clsx';
 import type { MenuItem } from '../../types/menu';
 import { TreeItem } from './TreeItem';
 
@@ -9,6 +10,8 @@ interface SidebarProps {
   onNavigate: (id: string) => void;
   onToggleExpand: (id: string) => void;
   modelLabel: string;
+  isOpen: boolean;
+  onClose: () => void;
 }
 
 export function Sidebar({
@@ -18,15 +21,32 @@ export function Sidebar({
   onNavigate,
   onToggleExpand,
   modelLabel,
+  isOpen,
+  onClose,
 }: SidebarProps) {
   return (
-    <aside className="w-72 flex-shrink-0 bg-white border-r border-gray-200 flex flex-col h-full overflow-hidden">
+    <aside
+      className={clsx(
+        'fixed inset-y-0 left-0 z-40 flex h-full w-[85vw] max-w-72 flex-col overflow-hidden border-r border-gray-200 bg-white shadow-xl transition-transform duration-300 ease-out lg:static lg:w-72 lg:translate-x-0 lg:shadow-none',
+        isOpen ? 'translate-x-0' : '-translate-x-full'
+      )}
+    >
       {/* Model badge */}
-      <div className="px-4 py-3 border-b border-gray-100 bg-highlight flex items-center gap-2">
-        <Cpu size={14} className="text-primary" />
-        <span className="text-xs font-semibold text-primary tracking-wide uppercase">
-          {modelLabel}
-        </span>
+      <div className="flex items-center justify-between border-b border-gray-100 bg-highlight px-4 py-3">
+        <div className="flex items-center gap-2">
+          <Cpu size={14} className="text-primary" />
+          <span className="text-xs font-semibold uppercase tracking-wide text-primary">
+            {modelLabel}
+          </span>
+        </div>
+        <button
+          type="button"
+          onClick={onClose}
+          className="inline-flex h-8 w-8 items-center justify-center rounded-md text-secondary transition-colors hover:bg-white hover:text-navy lg:hidden"
+          aria-label="Fechar menu"
+        >
+          <X size={16} />
+        </button>
       </div>
 
       {/* Tree */}

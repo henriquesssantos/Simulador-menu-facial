@@ -10,7 +10,7 @@ export function Breadcrumb({ items, modelLabel, onHomeClick }: BreadcrumbProps) 
   const allItems = [modelLabel, ...items];
 
   return (
-    <nav className="flex items-center gap-1.5 text-sm flex-wrap">
+    <nav className="flex max-w-full items-center gap-1.5 overflow-x-auto text-sm">
       <button
         onClick={onHomeClick}
         className="flex items-center gap-1 text-secondary hover:text-primary transition-colors duration-150"

@@ -37,8 +37,8 @@ export function SearchBar({
   }, [onClose]);
 
   return (
-    <div className="relative" ref={containerRef}>
-      <div className="flex items-center gap-2 bg-gray-100 border border-gray-200 rounded-lg px-3 py-2 w-80 focus-within:border-primary focus-within:bg-white transition-all duration-200">
+    <div className="relative w-full sm:w-80" ref={containerRef}>
+      <div className="flex items-center gap-2 bg-gray-100 border border-gray-200 rounded-lg px-3 py-2 w-full focus-within:border-primary focus-within:bg-white transition-all duration-200">
         <Search size={15} className="text-secondary flex-shrink-0" />
         <input
           type="text"

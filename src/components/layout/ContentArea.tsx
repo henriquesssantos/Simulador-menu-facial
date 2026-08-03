@@ -16,8 +16,8 @@ interface ContentAreaProps {
 
 function WelcomeState({ modelLabel }: { modelLabel: string }) {
   return (
-    <div className="max-w-3xl mx-auto px-8 py-12 animate-fadeIn">
-      <div className="text-center mb-8">
+    <div className="mx-auto max-w-3xl px-4 py-8 animate-fadeIn sm:px-6 sm:py-10 lg:px-8 lg:py-12">
+      <div className="mb-8 text-center">
         <h2 className="text-2xl font-bold text-navy mb-3">{modelLabel}</h2>
         <p className="text-secondary text-sm max-w-md mx-auto leading-relaxed">
           Selecione um item no menu lateral para visualizar as instruções de
@@ -43,7 +43,7 @@ export function ContentArea({
 }: ContentAreaProps) {
   if (!item) {
     return (
-      <div className="flex-1 bg-bg overflow-y-auto flex flex-col">
+      <div className="flex flex-1 flex-col overflow-y-auto bg-bg">
         <WelcomeState modelLabel={modelLabel} />
       </div>
     );
@@ -53,8 +53,8 @@ export function ContentArea({
   const screenshot = getMenuImage(item.id);
 
   return (
-    <main className="flex-1 bg-bg overflow-y-auto">
-      <div className="max-w-6xl mx-auto px-8 py-8 animate-fadeIn">
+    <main className="flex-1 overflow-y-auto bg-bg">
+      <div className="mx-auto max-w-6xl px-4 py-4 animate-fadeIn sm:px-6 sm:py-6 lg:px-8 lg:py-8">
         {/* Page header */}
         <div className="mb-8">
           <div className="flex items-center gap-2 mb-1">
@@ -84,7 +84,7 @@ export function ContentArea({
         )}
 
         {/* Two column layout for image and sections */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-6">
+        <div className="mb-6 grid grid-cols-1 gap-6 lg:grid-cols-2 lg:gap-8">
           {/* Device screenshot */}
           {screenshot && (
             <div>
@@ -106,12 +106,12 @@ export function ContentArea({
             ) : null}
             
             {/* Manual Link Button */}
-            <div className="flex gap-2">
+            <div className="flex flex-col gap-2 sm:flex-row">
               <a
                 href={content?.manualUrl || "https://manuais.intelbras.com.br/manual-interface-web-linha-bio-t/pt-BR/manual_unificado_web_2.0_pt-BR.html"}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-2 inline-flex items-center justify-center gap-2 px-4 py-3 bg-primary text-white text-sm font-medium rounded-lg hover:bg-primary-dark transition-colors flex-1"
+                className="mt-2 inline-flex flex-1 items-center justify-center gap-2 rounded-lg bg-primary px-4 py-3 text-sm font-medium text-white transition-colors hover:bg-primary-dark"
               >
                 Acessar Manual Web
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -122,7 +122,7 @@ export function ContentArea({
                 href="https://backend.intelbras.com/sites/default/files/2023-11/manual-do-usuario-ss-3532-mf-w-ss-3542-mf-w-pt.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-2 inline-flex items-center justify-center gap-2 px-4 py-3 bg-white border border-gray-300 text-gray-700 text-sm font-medium rounded-lg hover:bg-gray-50 transition-colors flex-1"
+                className="mt-2 inline-flex flex-1 items-center justify-center gap-2 rounded-lg border border-gray-300 bg-white px-4 py-3 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-50"
               >
                 Manual PDF
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">

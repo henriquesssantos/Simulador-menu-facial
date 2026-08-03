@@ -50,7 +50,7 @@ export function TreeItem({
       <button
         onClick={handleClick}
         className={clsx(
-          'w-full text-left flex items-center gap-2 py-1.5 px-3 rounded-md text-sm transition-all duration-200 group',
+          'group flex w-full min-w-0 items-center gap-2 rounded-md px-3 py-1.5 text-left text-sm transition-all duration-200',
           {
             'bg-primary/10 text-primary font-semibold': isActive,
             'text-navy font-medium hover:bg-gray-100':
@@ -81,7 +81,7 @@ export function TreeItem({
             )}
           />
         )}
-        <span className="truncate">{item.label}</span>
+        <span className="min-w-0 break-words leading-snug">{item.label}</span>
         {isActive && (
           <span className="ml-auto w-1 h-4 bg-primary rounded-full flex-shrink-0" />
         )}
