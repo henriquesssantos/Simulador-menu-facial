@@ -217,5 +217,3 @@ Adicionar componente `ManualAssistant`:
 7. Ajustar sinônimos e relevância.
 
 ---
-
-Se quiser, posso começar pela primeira etapa agora: montar o script de extração dos PDFs e gerar o índice para o frontend.
