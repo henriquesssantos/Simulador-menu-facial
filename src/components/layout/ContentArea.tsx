@@ -102,7 +102,7 @@ export function ContentArea({
                 <SectionCard key={i} section={section} />
               ))
             ) : !content ? (
-              <EmptyState item={item as MenuItem} modelLabel={modelLabel} />
+              <EmptyState item={item as MenuItem} />
             ) : null}
             
             {/* Manual Link Button */}
