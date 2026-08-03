@@ -1,12 +1,11 @@
-import { FileText, Sparkles } from 'lucide-react';
+import { FileText } from 'lucide-react';
 import type { MenuItem } from '../../types/menu';
 
 interface EmptyStateProps {
   item: MenuItem;
-  modelLabel: string;
 }
 
-export function EmptyState({ item, modelLabel }: EmptyStateProps) {
+export function EmptyState({ item }: EmptyStateProps) {
   return (
     <div className="flex flex-col items-center justify-center py-16 px-8 text-center">
       <div className="w-16 h-16 rounded-2xl bg-highlight border border-primary/20 flex items-center justify-center mb-6">
