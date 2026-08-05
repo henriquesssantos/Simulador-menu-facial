@@ -217,3 +217,7 @@ Adicionar componente `ManualAssistant`:
 7. Ajustar sinônimos e relevância.
 
 ---
+
+Copilot
+ollma
+deepshek
