@@ -1,19 +1,16 @@
 @import "tailwindcss";
 
 @theme {
-  --color-primary: #78BE20;
-  --color-primary-dark: #5E9E17;
-  --color-navy: #1F3A5F;
-  --color-graphite: #374151;
-  --color-secondary: #6B7280;
-  --color-bg: #F5F7F8;
-  --color-highlight: #EDF8DD;
+  --brand-primary: #00A335;
+  --brand-primary-dark: #00862C;
+  --brand-secondary: #54585A;
+  --brand-bg: #FFFFFF;
+  --brand-text: #54585A;
+  --brand-border: #8A8D8F;
+  --brand-hover: #E6F6E9;
+  --brand-highlight: #F5F7F8;
   --color-card: #FFFFFF;
-
-  --font-sans: 'Inter', system-ui, sans-serif;
-
-  --animate-fadeIn: fadeIn 0.2s ease-out;
-  --animate-slideDown: slideDown 0.2s ease-out;
+  --font-sans: 'Futura', 'Trebuchet MS', 'Montserrat', sans-serif;
 }
 
 @keyframes fadeIn {
@@ -26,9 +23,14 @@
   to   { opacity: 1; max-height: 600px; }
 }
 
-@keyframes pulse {
-  0%, 100% { opacity: 1; }
-  50%       { opacity: 0.5; }
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 *, *::before, *::after {

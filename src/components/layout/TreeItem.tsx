@@ -50,20 +50,20 @@ export function TreeItem({
       <button
         onClick={handleClick}
         className={clsx(
-          'group flex w-full min-w-0 items-center gap-2 rounded-md px-3 py-1.5 text-left text-sm transition-all duration-200',
+          'group flex w-full min-w-0 items-center gap-2 rounded-sm px-3 py-2 text-left text-sm transition-colors duration-200',
           {
-            'bg-primary/10 text-primary font-semibold': isActive,
-            'text-navy font-medium hover:bg-gray-100':
+            'bg-[var(--brand-primary)]/10 text-[var(--brand-primary)] font-semibold': isActive,
+            'text-[var(--brand-secondary)] font-medium hover:bg-[var(--brand-hover)] hover:text-[var(--brand-secondary)]':
               !isActive && hasChildren,
-            'text-graphite hover:bg-gray-100 hover:text-primary':
+            'text-[var(--brand-text)] hover:bg-[var(--brand-hover)] hover:text-[var(--brand-primary)]':
               !isActive && !hasChildren,
-            'text-primary/80 font-medium': isParentOfActive && !isActive,
+            'text-[var(--brand-primary)]/80 font-medium': isParentOfActive && !isActive,
           }
         )}
         style={{ paddingLeft: `${depth * 16 + 12}px` }}
       >
         {hasChildren ? (
-          <span className="flex-shrink-0 text-gray-400 transition-transform duration-200">
+          <span className="flex-shrink-0 text-[var(--brand-border)] transition-transform duration-200">
             {isExpanded ? (
               <ChevronDown size={14} />
             ) : (
@@ -73,17 +73,17 @@ export function TreeItem({
         ) : (
           <span
             className={clsx(
-              'flex-shrink-0 w-1.5 h-1.5 rounded-full ml-0.5 transition-all duration-200',
+              'flex-shrink-0 w-1.5 h-1.5 rounded-full ml-0.5 transition-colors duration-200',
               {
-                'bg-primary': isActive,
-                'bg-gray-300 group-hover:bg-primary': !isActive,
+                'bg-[var(--brand-primary)]': isActive,
+                'bg-[var(--brand-border)] group-hover:bg-[var(--brand-primary)]': !isActive,
               }
             )}
           />
         )}
         <span className="min-w-0 break-words leading-snug">{item.label}</span>
         {isActive && (
-          <span className="ml-auto w-1 h-4 bg-primary rounded-full flex-shrink-0" />
+          <span className="ml-auto w-1 h-4 bg-[var(--brand-primary)] rounded-full flex-shrink-0" />
         )}
       </button>
 

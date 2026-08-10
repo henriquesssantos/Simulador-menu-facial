@@ -8,7 +8,10 @@ export interface PageContent {
   title: string;
   description?: string;
   menuPath?: string;
-  manualUrl?: string;
+  image?: string;
+  manualUrl?: string; // legacy
+  manualPdf?: string;
+  manualWeb?: string;
   sections?: Section[];
 }
 

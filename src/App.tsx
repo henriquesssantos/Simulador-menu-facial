@@ -7,15 +7,14 @@ import { SimulatorPage } from './pages/SimulatorPage';
 function App() {
   const [activeModel, setActiveModel] = useState<Model | null>(null);
 
-  if (!activeModel) {
-    return <HomePage models={models} onSelect={setActiveModel} />;
-  }
-
   return (
-    <SimulatorPage
-      model={activeModel}
-      onBack={() => setActiveModel(null)}
-    />
+    <div className="min-h-screen bg-[var(--brand-bg)] text-[var(--brand-text)]">
+      {!activeModel ? (
+        <HomePage models={models} onSelect={setActiveModel} />
+      ) : (
+        <SimulatorPage model={activeModel} onBack={() => setActiveModel(null)} />
+      )}
+    </div>
   );
 }
 

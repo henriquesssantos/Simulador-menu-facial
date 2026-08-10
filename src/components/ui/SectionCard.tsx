@@ -9,78 +9,103 @@ interface SectionCardProps {
 const typeConfig = {
   info: {
     icon: Info,
-    bg: 'bg-blue-50',
-    border: 'border-blue-200',
-    iconColor: 'text-blue-500',
-    titleColor: 'text-blue-800',
-    textColor: 'text-blue-700',
+    bg: 'bg-[var(--brand-highlight)]',
+    border: 'border-[var(--brand-border)]/50',
+    iconColor: 'text-[var(--brand-primary)]',
+    titleColor: 'text-[var(--brand-secondary)]',
+    textColor: 'text-[var(--brand-text)]',
+    bulletColor: 'bg-[var(--brand-primary)]',
   },
   tip: {
     icon: Lightbulb,
-    bg: 'bg-highlight',
-    border: 'border-primary/30',
-    iconColor: 'text-primary',
-    titleColor: 'text-primary-dark',
-    textColor: 'text-graphite',
+    bg: 'bg-[var(--brand-highlight)]',
+    border: 'border-[var(--brand-primary)]/20',
+    iconColor: 'text-[var(--brand-primary)]',
+    titleColor: 'text-[var(--brand-primary)]',
+    textColor: 'text-[var(--brand-text)]',
+    bulletColor: 'bg-[var(--brand-primary)]',
   },
   warning: {
     icon: AlertTriangle,
-    bg: 'bg-amber-50',
-    border: 'border-amber-200',
-    iconColor: 'text-amber-500',
-    titleColor: 'text-amber-800',
-    textColor: 'text-amber-700',
+    bg: 'bg-[var(--brand-highlight)]',
+    border: 'border-amber-200/60',
+    iconColor: 'text-amber-600',
+    titleColor: 'text-[var(--brand-secondary)]',
+    textColor: 'text-[var(--brand-text)]',
+    bulletColor: 'bg-amber-400',
   },
   note: {
     icon: FileText,
-    bg: 'bg-gray-50',
-    border: 'border-gray-200',
-    iconColor: 'text-gray-500',
-    titleColor: 'text-gray-700',
-    textColor: 'text-gray-600',
+    bg: 'bg-[var(--brand-highlight)]',
+    border: 'border-[var(--brand-border)]/50',
+    iconColor: 'text-[var(--brand-secondary)]',
+    titleColor: 'text-[var(--brand-secondary)]',
+    textColor: 'text-[var(--brand-text)]',
+    bulletColor: 'bg-[var(--brand-border)]',
   },
 };
+
+/**
+ * Splits content into a vertical list when it contains comma-separated values.
+ * Returns null if content should be rendered as plain text (short sentences, tips, warnings).
+ */
+function parseListItems(content: string): string[] | null {
+  // Split by comma, ignoring commas inside parentheses
+  const parts = content.split(/,\s*(?![^(]*\))/);
+  if (parts.length < 2) return null;
+
+  return parts
+    .map((part) => {
+      let text = part.trim();
+      // Remove trailing period
+      text = text.replace(/\.$/, '');
+      // Handle last item that starts with "e " (Portuguese "and")
+      if (text.toLowerCase().startsWith('e ') && text.length > 2) {
+        text = text.substring(2);
+      }
+      return text;
+    })
+    .filter(Boolean);
+}
 
 export function SectionCard({ section }: SectionCardProps) {
   const type = section.type ?? 'note';
   const config = typeConfig[type];
   const Icon = config.icon;
+  const listItems = parseListItems(section.content);
 
   return (
     <div
       className={clsx(
-        'rounded-xl border p-4 transition-all duration-200',
+        'rounded-sm border p-4 transition-all duration-200 bg-[var(--color-card)]',
         config.bg,
         config.border
       )}
     >
       <div className="flex items-start gap-3">
         <Icon size={16} className={clsx('flex-shrink-0 mt-0.5', config.iconColor)} />
-        <div>
+        <div className="flex-1 min-w-0">
           {section.title && (
-            <p className={clsx('text-sm font-semibold mb-1', config.titleColor)}>
+            <p className={clsx('text-sm font-semibold mb-2', config.titleColor)}>
               {section.title}
             </p>
           )}
-          {section.content.split(/,\s+(?![^(]*\))/).length > 2 ? (
-            <ul className={clsx('text-sm leading-relaxed space-y-1 list-disc list-inside', config.textColor)}>
-              {section.content.split(/,\s+(?![^(]*\))/).map((item, index) => {
-                // Remove ' e ' from the last item if it exists
-                let text = item.trim();
-                if (index === section.content.split(/,\s+(?![^(]*\))/).length - 1 && text.startsWith('e ')) {
-                  text = text.substring(2);
-                } else if (text.includes(' e ') && index === section.content.split(/,\s+(?![^(]*\))/).length - 1) {
-                  // Sometimes the last two items are joined by " e " instead of ", e "
-                  const parts = text.split(' e ');
-                  return (
-                    <>
-                      <li>{parts[0]}</li>
-                      <li>{parts[1].replace('.', '')}</li>
-                    </>
-                  );
-                }
-                return <li key={index}>{text.replace('.', '')}</li>;
-              })}
+
+          {listItems ? (
+            <ul className="space-y-1.5">
+              {listItems.map((item, index) => (
+                <li key={index} className="flex items-start gap-2">
+                  <span
+                    className={clsx(
+                      'flex-shrink-0 w-1.5 h-1.5 rounded-full mt-1.5',
+                      config.bulletColor
+                    )}
+                  />
+                  <span className={clsx('text-sm leading-snug', config.textColor)}>
+                    {item}
+                  </span>
+                </li>
+              ))}
             </ul>
           ) : (
             <p className={clsx('text-sm leading-relaxed whitespace-pre-line', config.textColor)}>

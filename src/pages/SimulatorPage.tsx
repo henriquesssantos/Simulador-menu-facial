@@ -103,6 +103,7 @@ export function SimulatorPage({ model, onBack }: SimulatorPageProps) {
         <ContentArea
           item={activeItem}
           modelLabel={model.label}
+          modelImage={model.image}
           prevItem={prevItem}
           nextItem={nextItem}
           onNavigate={navigateTo}
@@ -112,7 +113,7 @@ export function SimulatorPage({ model, onBack }: SimulatorPageProps) {
       {/* Back button */}
       <button
         onClick={onBack}
-        className="fixed bottom-3 right-3 sm:bottom-5 sm:right-5 flex items-center gap-2 px-3 py-2 sm:px-4 sm:py-2 bg-white border border-gray-200 rounded-xl shadow-lg text-sm text-secondary hover:text-navy hover:border-gray-300 transition-all duration-200 z-50"
+        className="fixed bottom-5 right-5 flex items-center gap-2 px-4 py-2 bg-[var(--brand-bg)] border border-[var(--brand-border)]/30 rounded-sm text-sm text-[var(--brand-secondary)] hover:text-[var(--brand-primary)] hover:border-[var(--brand-primary)]/40 transition duration-200 z-50"
       >
         <LogOut size={14} />
         Trocar modelo

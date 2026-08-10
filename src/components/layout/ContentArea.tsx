@@ -9,24 +9,25 @@ import { NavigationButtons } from '../ui/NavigationButtons';
 interface ContentAreaProps {
   item: FlatMenuItem | null;
   modelLabel: string;
+  modelImage?: string;
   prevItem: FlatMenuItem | null;
   nextItem: FlatMenuItem | null;
   onNavigate: (id: string) => void;
 }
 
-function WelcomeState({ modelLabel }: { modelLabel: string }) {
+function WelcomeState({ modelLabel, modelImage }: { modelLabel: string; modelImage?: string }) {
   return (
-    <div className="mx-auto max-w-3xl px-4 py-8 animate-fadeIn sm:px-6 sm:py-10 lg:px-8 lg:py-12">
-      <div className="mb-8 text-center">
-        <h2 className="text-2xl font-bold text-navy mb-3">{modelLabel}</h2>
-        <p className="text-secondary text-sm max-w-md mx-auto leading-relaxed">
+    <div className="max-w-3xl mx-auto px-8 py-12 animate-fadeIn">
+      <div className="text-center mb-8">
+        <h2 className="text-2xl font-bold text-[var(--brand-secondary)] mb-3">{modelLabel}</h2>
+        <p className="text-[var(--brand-secondary)] text-sm max-w-md mx-auto leading-relaxed">
           Selecione um item no menu lateral para visualizar as instruções de
           configuração e suporte.
         </p>
       </div>
 
       <MenuScreenshot
-        src={welcomeImage}
+        src={modelImage || welcomeImage}
         alt="Menu principal do equipamento"
         caption="Menu principal — tela inicial do equipamento"
       />
@@ -37,36 +38,38 @@ function WelcomeState({ modelLabel }: { modelLabel: string }) {
 export function ContentArea({
   item,
   modelLabel,
+  modelImage,
   prevItem,
   nextItem,
   onNavigate,
 }: ContentAreaProps) {
   if (!item) {
     return (
-      <div className="flex flex-1 flex-col overflow-y-auto bg-bg">
-        <WelcomeState modelLabel={modelLabel} />
+      <div className="flex-1 bg-[var(--brand-bg)] overflow-y-auto flex flex-col">
+        <WelcomeState modelLabel={modelLabel} modelImage={modelImage} />
       </div>
     );
   }
 
   const content = item.content;
-  const screenshot = getMenuImage(item.id);
+  // Para manter retrocompatibilidade com o modelo anterior (SS 3542), usamos getMenuImage como fallback
+  const screenshot = content?.image || getMenuImage(item.id);
 
   return (
-    <main className="flex-1 overflow-y-auto bg-bg">
-      <div className="mx-auto max-w-6xl px-4 py-4 animate-fadeIn sm:px-6 sm:py-6 lg:px-8 lg:py-8">
+    <main className="flex-1 bg-[var(--brand-bg)] overflow-y-auto">
+      <div className="max-w-6xl mx-auto px-8 py-8 animate-fadeIn">
         {/* Page header */}
         <div className="mb-8">
           <div className="flex items-center gap-2 mb-1">
-            <span className="text-xs font-mono text-secondary bg-gray-100 px-2 py-0.5 rounded">
+            <span className="text-xs font-mono text-[var(--brand-secondary)] bg-[var(--brand-highlight)] px-2 py-0.5 rounded-sm">
               {item.path}
             </span>
           </div>
-          <h1 className="text-2xl font-bold text-navy mt-3 mb-2">
+          <h1 className="text-2xl font-bold text-[var(--brand-text)] mt-3 mb-2">
             {content?.title ?? item.label}
           </h1>
           {content?.description && (
-            <p className="text-graphite text-base leading-relaxed">
+            <p className="text-[var(--brand-secondary)] text-base leading-relaxed">
               {content.description}
             </p>
           )}
@@ -74,11 +77,11 @@ export function ContentArea({
 
         {/* Menu path */}
         {content?.menuPath && (
-          <div className="flex items-center gap-2 mb-6 px-4 py-3 bg-white border border-gray-200 rounded-xl">
-            <MapPin size={14} className="text-primary flex-shrink-0" />
+          <div className="flex items-center gap-2 mb-6 px-4 py-3 bg-[var(--brand-bg)] border border-[var(--brand-border)] rounded-sm">
+            <MapPin size={14} className="text-[var(--brand-primary)] flex-shrink-0" />
             <div>
-              <p className="text-xs text-secondary mb-0.5">Localização no menu do equipamento</p>
-              <p className="text-sm font-mono font-medium text-navy">{content.menuPath}</p>
+              <p className="text-xs text-[var(--brand-secondary)] mb-0.5">Localização no menu do equipamento</p>
+              <p className="text-sm font-mono font-medium text-[var(--brand-text)]">{content.menuPath}</p>
             </div>
           </div>
         )}
@@ -99,19 +102,21 @@ export function ContentArea({
           <div className="flex flex-col gap-4">
             {content?.sections && content.sections.length > 0 ? (
               content.sections.map((section, i) => (
-                <SectionCard key={i} section={section} />
+                <div key={i} className="animate-slideUp" style={{ animationDelay: `${i * 100}ms`, animationFillMode: 'both' }}>
+                  <SectionCard section={section} />
+                </div>
               ))
             ) : !content ? (
-              <EmptyState item={item as MenuItem} />
+              <EmptyState item={item as MenuItem} modelLabel={modelLabel} />
             ) : null}
             
             {/* Manual Link Button */}
             <div className="flex flex-col gap-2 sm:flex-row">
               <a
-                href={content?.manualUrl || "https://manuais.intelbras.com.br/manual-interface-web-linha-bio-t/pt-BR/manual_unificado_web_2.0_pt-BR.html"}
+                href={content?.manualWeb || content?.manualUrl || "https://manuais.intelbras.com.br/manual-interface-web-linha-bio-t/pt-BR/manual_unificado_web_2.0_pt-BR.html"}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-2 inline-flex flex-1 items-center justify-center gap-2 rounded-lg bg-primary px-4 py-3 text-sm font-medium text-white transition-colors hover:bg-primary-dark"
+                className="mt-2 inline-flex items-center justify-center gap-2 px-4 py-3 bg-[var(--brand-primary)] text-white text-sm font-medium rounded-sm hover:bg-[var(--brand-primary-dark)] transition-colors flex-1"
               >
                 Acessar Manual Web
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -119,10 +124,10 @@ export function ContentArea({
                 </svg>
               </a>
               <a
-                href="https://backend.intelbras.com/sites/default/files/2023-11/manual-do-usuario-ss-3532-mf-w-ss-3542-mf-w-pt.pdf"
+                href={content?.manualPdf || "https://backend.intelbras.com/sites/default/files/2023-11/manual-do-usuario-ss-3532-mf-w-ss-3542-mf-w-pt.pdf"}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-2 inline-flex flex-1 items-center justify-center gap-2 rounded-lg border border-gray-300 bg-white px-4 py-3 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-50"
+                className="mt-2 inline-flex items-center justify-center gap-2 px-4 py-3 bg-[var(--brand-bg)] border border-[var(--brand-border)] text-[var(--brand-secondary)] text-sm font-medium rounded-sm hover:bg-[var(--brand-highlight)] transition-colors flex-1"
               >
                 Manual PDF
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">

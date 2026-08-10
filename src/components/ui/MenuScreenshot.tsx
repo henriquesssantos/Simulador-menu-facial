@@ -1,4 +1,6 @@
+import { useState } from 'react';
 import { MonitorSmartphone } from 'lucide-react';
+import { Skeleton } from './Skeleton';
 
 interface MenuScreenshotProps {
   src: string;
@@ -11,19 +13,27 @@ export function MenuScreenshot({
   alt,
   caption = 'Tela do equipamento',
 }: MenuScreenshotProps) {
+  const [isLoaded, setIsLoaded] = useState(false);
+
   return (
-    <figure className="mb-6 overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm">
-      <div className="flex items-center gap-2 border-b border-gray-100 bg-gray-50 px-4 py-2.5">
-        <MonitorSmartphone size={14} className="text-primary" />
-        <figcaption className="text-xs font-medium text-secondary">
+    <figure className="mb-6 overflow-hidden rounded-sm border border-brand-border bg-white shadow-[0_4px_6px_rgba(0,0,0,0.1)]">
+      <div className="flex items-center gap-2 border-b border-brand-border bg-brand-highlight px-4 py-2.5">
+        <MonitorSmartphone size={14} className="text-brand-primary" />
+        <figcaption className="text-xs font-medium text-brand-secondary">
           {caption}
         </figcaption>
       </div>
-      <div className="flex justify-center bg-gradient-to-b from-gray-50 to-white p-6">
+      <div className="flex justify-center bg-brand-bg p-6 relative min-h-[300px]">
+        {!isLoaded && (
+          <Skeleton className="absolute w-[240px] h-[320px]" />
+        )}
         <img
           src={src}
           alt={alt}
-          className="max-h-[420px] w-auto max-w-full rounded-xl shadow-md ring-1 ring-black/5"
+          onLoad={() => setIsLoaded(true)}
+          className={`max-h-[420px] w-auto max-w-full rounded-sm ring-1 ring-black/5 transition-opacity duration-300 ${
+            isLoaded ? 'opacity-100' : 'opacity-0'
+          }`}
           loading="lazy"
         />
       </div>
