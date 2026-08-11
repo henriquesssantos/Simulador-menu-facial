@@ -52,17 +52,4 @@ export function NavigationButtons({
     </div>
   );
 }
-          <div className="text-right">
-            <p className="text-xs text-[var(--brand-secondary)] mb-0.5">Próximo</p>
-            <p className="text-sm font-medium text-[var(--brand-text)] group-hover:text-[var(--brand-primary)] transition-colors line-clamp-1">
-              {nextItem.label}
-            </p>
-          </div>
-          <ArrowRight size={16} className="text-[var(--brand-secondary)] group-hover:text-[var(--brand-primary)] transition-colors flex-shrink-0" />
-        </button>
-      ) : (
-        <div />
-      )}
-    </div>
-  );
-}
+
