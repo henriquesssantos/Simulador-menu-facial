@@ -1,0 +1,1013 @@
+import type { MenuItem } from '../types/menu';
+
+const BASE_URL = import.meta.env.BASE_URL;
+const IMG = (name: string) => `${BASE_URL}imagens-mip1000ip/${encodeURI(name)}`;
+const MANUAL_PDF = 'https://backend.intelbras.com/sites/default/files/2022-06/manual-mip-1000-ip.pdf';
+
+export const mip1000ipMenuTree: MenuItem[] = [
+  // ── 1. CADASTRO ──────────────────────────────────────────────────────────
+  {
+    id: 'mip-cadastro',
+    label: 'Cadastro',
+    path: '/cadastro',
+    content: {
+      title: 'Cadastro',
+      description: 'Menu principal de cadastro do MIP 1000 IP. Permite cadastrar, editar, consultar e excluir usuários, dispositivos, chaveiros, controles, digitais e faces. Atenção: as operações de cadastro são bloqueadas enquanto o MIP estiver conectado ao software SGA 1000 IP.',
+      menuPath: 'Menu Principal > Cadastro',
+      image: IMG('cadastro.jpeg'),
+      manualPdf: MANUAL_PDF,
+      sections: [
+        { title: 'Itens do menu', content: 'Usuário, Dispositivo, Chaveiro(s), Controle(s), Digital(is), Face(s)', type: 'info' },
+        { title: 'Atenção — Conectado ao Software', content: 'Quando o MIP estiver conectado ao software SGA 1000 IP, o cadastro via menu é bloqueado. Selecione "Desconectar Software" para liberar o acesso ao menu de cadastro.', type: 'warning' },
+      ],
+    },
+    children: [
+      // 1.1 Usuário
+      {
+        id: 'mip-cadastro-usuario',
+        label: 'Usuário',
+        path: '/cadastro/usuario',
+        content: {
+          title: 'Usuário',
+          description: 'Gerenciamento completo de usuários do condomínio. Permite cadastrar moradores, prestadores de serviço e visitantes, definindo credenciais de acesso, dados pessoais e permissões por dispositivo.',
+          menuPath: 'Cadastro > Usuário',
+          image: IMG('cadastro-usuario.jpeg'),
+          manualPdf: MANUAL_PDF,
+          sections: [{ title: 'Operações disponíveis', content: 'Incluir, Editar, Consultar, Excluir', type: 'info' }],
+        },
+        children: [
+          {
+            id: 'mip-cadastro-usuario-incluir',
+            label: 'Incluir',
+            path: '/cadastro/usuario/incluir',
+            content: {
+              title: 'Incluir Usuário',
+              description: 'Cadastra um novo usuário no sistema do MIP 1000 IP. O nome aceita até 34 caracteres. A senha deve ter de 4 a 8 dígitos e ser superior a 1000. Senhas não podem se repetir entre usuários.',
+              menuPath: 'Cadastro > Usuário > Incluir',
+              gallery: [
+                { label: 'Nome', image: IMG('usuario-incluir-nome.jpeg') },
+                { label: 'Tipo', image: IMG('usuario-incluir-tipo.jpeg') },
+                { label: 'Apto', image: IMG('usuario-incluir-apto.jpeg') },
+                { label: 'Bloco', image: IMG('usuario-incluir-bloco.jpeg') },
+                { label: 'Senha', image: IMG('usuario-incluir-senha.jpeg') },
+                { label: 'Chaveiros', image: IMG('usuario-incluir-chaveiro.jpeg') },
+                { label: 'Controle', image: IMG('usuario-incluir-controle.jpeg') },
+                { label: 'Digital(is)', image: IMG('usuario-incluir-digitais.jpeg') },
+                { label: 'Face(s)', image: IMG('usuario-incluir-face.jpeg') },
+                { label: 'Disp. permitidos', image: IMG('usuario-incluir-disp.permitidos.jpeg') },
+                { label: 'Dias permitidos', image: IMG('usuario-incluir-diiaspermitidos-visita-prest.servico.jpeg') },
+                { label: 'Data inicial', image: IMG('usuario-incluir-datainicial-visita-prest.servico.jpeg') },
+                { label: 'Data final', image: IMG('usuario-incluir-datafinal-visitante-prest.servico.jpeg') },
+                { label: 'Início período', image: IMG('usuario-incluir-inicioperiodo-visita-prest.servico.jpeg') },
+                { label: 'Período final', image: IMG('usuario-incluir-periodofinal-visita-prest.servico.jpeg') },
+                { label: 'RG', image: IMG('usuario-incluir-rg.jpeg') },
+                { label: 'E-mail', image: IMG('usuario-incluir-email.jpeg') },
+                { label: 'Tel. Residencial', image: IMG('usuario-incluir-tel.residencial.jpeg') },
+                { label: 'Tel. Celular', image: IMG('usuario-incluir-tel.celular.jpeg') },
+                { label: 'CPF', image: IMG('usuario-incluir-cpf.jpeg') },
+              ],
+              manualPdf: MANUAL_PDF,
+              sections: [
+                { title: 'Campos — Dados básicos', content: 'Nome (máx. 34 caracteres), Tipo (Morador / Prestador de Serviço / Visitante), Apto (máx. 5 dígitos), Bloco, Senha (4–8 dígitos, > 1000)', type: 'info' },
+                { title: 'Campos — Credenciais', content: 'Chaveiros (RFID Mifare 13,56 MHz), Controle (remoto XTR 1000), Digital(is) (biometria), Face(s) (reconhecimento facial)', type: 'info' },
+                { title: 'Campos — Permissões', content: 'Dispositivos permitidos: XRE, XPE, XLT, SS (faciais), CT', type: 'info' },
+                { title: 'Campos — Dados complementares (modo avançado)', content: [
+                  'RG',
+                  'E-mail',
+                  'Tel. Residencial',
+                  'Tel. Celular',
+                  'CPF.',
+                  'Estes campos não são exibidos no modo de cadastro "básico".'
+                ], type: 'info' },
+                { title: 'Tipos Prestador de Serviço / Visitante', content: [
+                  'Surgem campos adicionais de validade: Data inicial, Data final, Início período, Final período.',
+                  'Após as permissões de dispositivos é exibida a opção de "Dias permitidos".',
+                  'Prestadores e visitantes não possuem opções de credenciais por face.'
+                ], type: 'warning' },
+              ],
+            },
+          },
+          {
+            id: 'mip-cadastro-usuario-editar',
+            label: 'Editar',
+            path: '/cadastro/usuario/editar',
+            content: {
+              title: 'Editar Usuário',
+              description: 'Localiza e edita os dados de um usuário já cadastrado. A busca pode ser feita por nome ou número do apartamento. O campo "Tipo" é o único que não pode ser alterado após o cadastro.',
+              menuPath: 'Cadastro > Usuário > Editar',
+              image: IMG('usuario-editar.jpeg'),
+              manualPdf: MANUAL_PDF,
+              gallery: [
+                { label: 'Nome', image: IMG('usuario-editar-nome.jpeg') },
+                { label: 'Bloco', image: IMG('usuario-editar-bloco.jpeg') },
+                { label: 'Tipo (não editável)', image: IMG('usuario-editar-tipo.jpeg') },
+                { label: 'Senha', image: IMG('usuario-editar-senha.jpeg') },
+                { label: 'E-mail', image: IMG('usuario-editar-email.jpeg') },
+                { label: 'Dispositivos Permitidos', image: IMG('usuario-editar-disp.permitidos.jpeg') },
+                { label: 'RG', image: IMG('usuario-editar-rg.jpeg') },
+                { label: 'CPF', image: IMG('usuario-editar-cpf.jpeg') },
+                { label: 'Tel. Residencial', image: IMG('usuario-editar-tel.residencial.jpeg') },
+                { label: 'Tel. Celular', image: IMG('usuario-editar-tel.celular.jpeg') },
+              ],
+              sections: [
+                { title: 'Busca', content: 'Localizar por Nome ou Apto', type: 'info' },
+                { title: 'Campos editáveis', content: 'Nome, Apto, Bloco, Senha, Dispositivos permitidos, RG, E-mail, Tel. residencial, Tel. celular, CPF', type: 'info' },
+                { title: 'Campo não editável', content: 'O campo Tipo (Morador / Prestador de Serviço / Visitante) não pode ser alterado após o cadastro.', type: 'warning' },
+                { title: 'Tipos Visitante / Prestador de Serviço', content: 'Caso o tipo do usuário seja visitante ou prestador de serviço, é possível editar Data inicial, Data final, Início período, Final período e Dias permitidos.', type: 'tip' },
+              ],
+            },
+          },
+          {
+            id: 'mip-cadastro-usuario-consultar',
+            label: 'Consultar',
+            path: '/cadastro/usuario/consultar',
+            content: {
+              title: 'Consultar Usuário',
+              description: 'Exibe todas as informações de um usuário cadastrado. A busca pode ser feita por nome ou número do apartamento.',
+              menuPath: 'Cadastro > Usuário > Consultar',
+              image: IMG('usuario-consultar.jpeg'),
+              manualPdf: MANUAL_PDF,
+              gallery: [
+                { label: 'Buscar por Nome', image: IMG('usuario-consultar-nome.jpeg') },
+                { label: 'Buscar por Apto', image: IMG('usuario-consultar-apto.jpeg') },
+                { label: 'Dados do Usuário', image: IMG('usuario-consultar.jpeg') },
+                { label: 'Bloco', image: IMG('usuario-consultar-bloco.jpeg') },
+                { label: 'Tipo', image: IMG('usuario-consultar-tipo.jpeg') },
+                { label: 'Senha', image: IMG('usuario-consultar-senha.jpeg') },
+                { label: 'Chaveiros', image: IMG('usuario-consultar-chaveiro.jpeg') },
+                { label: 'Controles', image: IMG('usuario-consultar-controles.jpeg') },
+                { label: 'Digitais', image: IMG('usuario-consultar-digital.jpeg') },
+                { label: 'Faces', image: IMG('usuario-consultar-face.jpeg') },
+                { label: 'Dispositivos Permitidos', image: IMG('usuario-consultar-disp.permitidos.jpeg') },
+                { label: 'E-mail', image: IMG('usuario-consultar-email.jpeg') },
+                { label: 'RG', image: IMG('usuario-consultar-rg.jpeg') },
+                { label: 'Tel. Celular', image: IMG('usuario-consultar-tel.celular.jpeg') },
+                { label: 'Tel. Residencial', image: IMG('usuario-consultar-tel.residencial.jpeg') },
+                { label: 'PDF/Relatório', image: IMG('usuario-consultar-pdf.jpeg') },
+              ],
+              sections: [
+                { title: 'Busca', content: 'Localizar por Nome ou Apto', type: 'info' },
+                { title: 'Dados exibidos', content: 'Nome, Tipo, Apto, Bloco, Senha, Chaveiros, Controles, Digital(is), Face(s), Dispositivos permitidos, RG, E-mail, Tel. residencial, Tel. celular, CPF', type: 'info' },
+              ],
+            },
+          },
+          {
+            id: 'mip-cadastro-usuario-excluir',
+            label: 'Excluir',
+            path: '/cadastro/usuario/excluir',
+            content: {
+              title: 'Excluir Usuário',
+              description: 'Remove permanentemente um usuário do sistema. A busca pode ser feita por nome ou número do apartamento. O sistema exibe uma tela de confirmação antes de concluir a exclusão.',
+              menuPath: 'Cadastro > Usuário > Excluir',
+              image: IMG('usuario-excluir.jpeg'),
+              manualPdf: MANUAL_PDF,
+              sections: [
+                { title: 'Busca', content: 'Localizar por Nome ou Apto', type: 'info' },
+                { title: 'Confirmação', content: 'O sistema exibe a mensagem "Tem certeza?" antes de excluir. Pressione Enter/OK para confirmar ou ESC/Cancelar para abortar.', type: 'warning' },
+              ],
+            },
+          },
+        ],
+      },
+
+      // 1.2 Dispositivo
+      {
+        id: 'mip-cadastro-dispositivo',
+        label: 'Dispositivo',
+        path: '/cadastro/dispositivo',
+        content: {
+          title: 'Dispositivo',
+          description: 'Gerenciamento dos dispositivos integrados ao barramento RS-485 do MIP 1000 IP: leitores biométricos, faciais, XRE, XLT, CT, entre outros. Permite incluir, ressincronizar, editar nomes, consultar e excluir dispositivos.',
+          menuPath: 'Cadastro > Dispositivo',
+          image: IMG('cadastro-dispositivo.jpeg'),
+          manualPdf: MANUAL_PDF,
+          sections: [{ title: 'Operações disponíveis', content: 'Incluir novo S1, Incluir novo S2, Ressincronizar, Editar Nome, Consultar, Excluir', type: 'info' }],
+        },
+        children: [
+          {
+            id: 'mip-cadastro-dispositivo-incluir-s1',
+            label: 'Incluir novo S1',
+            path: '/cadastro/dispositivo/incluir-s1',
+            content: {
+              title: 'Incluir novo Dispositivo (S1)',
+              description: 'Adiciona um novo dispositivo ao barramento RS-485, iniciando pelo endereço S1. O MIP realiza varredura no barramento e reconhece automaticamente os dispositivos conectados.',
+              menuPath: 'Cadastro > Dispositivo > Incluir novo S1',
+              image: IMG('dispositivo-incluir-s1.jpeg'),
+              manualPdf: MANUAL_PDF,
+              gallery: [
+                { label: 'Selecionar Tipo de Dispositivo 1/3', image: IMG('dispositivo-incluir-s1.jpeg') },
+                { label: 'Selecionar Tipo de Dispositivo 2/3', image: IMG('dispositivo-incluir-buscar3.jpeg') },
+                { label: 'Selecionar Tipo de Dispositivo 3/3', image: IMG('dispositivo-incluir-s2.jpeg') },
+              ],
+            },
+          },
+          {
+            id: 'mip-cadastro-dispositivo-incluir-s2',
+            label: 'Incluir novo S2',
+            path: '/cadastro/dispositivo/incluir-s2',
+            content: {
+              title: 'Incluir novo Dispositivo (S2)',
+              description: 'Adiciona um novo dispositivo ao barramento RS-485, iniciando pelo endereço S2. Utilizado quando há dois barramentos separados ou expansão do sistema.',
+              menuPath: 'Cadastro > Dispositivo > Incluir novo S2',
+              image: IMG('dispositivo-incluir-s2.jpeg'),
+              manualPdf: MANUAL_PDF,
+              gallery: [
+                { label: 'Selecionar Tipo de Dispositivo 1/3', image: IMG('dispositivo-incluir-s1.jpeg') },
+                { label: 'Selecionar Tipo de Dispositivo 2/3', image: IMG('dispositivo-incluir-buscar3.jpeg') },
+                { label: 'Selecionar Tipo de Dispositivo 3/3', image: IMG('dispositivo-incluir-s2.jpeg') },
+              ],
+            },
+          },
+          {
+            id: 'mip-cadastro-dispositivo-ressincronizar',
+            label: 'Ressincronizar',
+            path: '/cadastro/dispositivo/ressincronizar',
+            content: {
+              title: 'Ressincronizar Dispositivo',
+              description: 'Força a re-sincronização de todos os dados de usuários e permissões para um dispositivo específico. Útil após substituição de firmware, troca de dispositivo ou quando há divergência de cadastros.',
+              menuPath: 'Cadastro > Dispositivo > Ressincronizar',
+              image: IMG('dispositivo-ressincronizar.jpeg'),
+              manualPdf: MANUAL_PDF,
+              gallery: [
+                { label: 'Selecionar Dispositivo para Ressincronizar', image: IMG('dispositivo-ressincronizar.jpeg') },
+
+              ],
+              sections: [
+                { title: 'Dispositivos compatíveis', content: 'XRE, XLT-ID, XPE-ID, BioInox (SS 311 MF), CT 500 1P, SS 3530 - Facial, Remote, SS3430 - BIO, SS 3420 - BIO, SS 3540 - Facial, CT 3000 2PB, XPE BIO, SS 3540 BIO, SS 1530, SS 1540, SS (3/5)53(1/2) MF', type: 'info' },
+              ],
+            },
+          },
+          {
+            id: 'mip-cadastro-dispositivo-editar-nome',
+            label: 'Editar',
+            path: '/cadastro/dispositivo/editar-nome',
+            content: {
+              title: 'Editar Nome do Dispositivo',
+              description: 'Permite renomear um dispositivo cadastrado e configurar seus acionamentos (relés), tempos de acionamento e sensores. Os campos disponíveis variam conforme o tipo do dispositivo selecionado.',
+              menuPath: 'Cadastro > Dispositivo > Editar Nome',
+              image: IMG('dispositivo-editar-nome.jpeg'),
+              manualPdf: MANUAL_PDF,
+              gallery: [],
+              deviceGalleryOptions: [
+                {
+                  value: 'mip',
+                  label: 'MIP',
+                  gallery: [
+                    { label: 'Nome do Dispositivo', image: IMG('mip.config.nome.png') },
+                    { label: 'Nome Acion. 01', image: IMG('mip.config.nome.acion1png.png') },
+                    { label: 'Nome Acion. 02', image: IMG('mip_config_nome_acion2.png') },
+                    { label: 'Tempo Acion. 01', image: IMG('mip.config.tempo.acion1.png') },
+                    { label: 'Tempo Acion. 02', image: IMG('mip_config_tempo_acion2.png') },
+                    { label: 'Tempo Sens. 01', image: IMG('mip_config_tempo_sens1.png') },
+                    { label: 'Tempo Sens. 02', image: IMG('mip.config.tempo.sens2.png') },
+                    { label: 'Intertravamento', image: IMG('mip.config.intertravamento.png') },
+                  ],
+                },
+                {
+                  value: 'xlt',
+                  label: 'XLT',
+                  gallery: [
+                    { label: 'Nome do Dispositivo', image: IMG('xlt.editar.nome.png') },
+                    { label: 'Tipo Acion. 01', image: IMG('xlt.editar.tipo.acion.1.png') },
+                    { label: 'Tipo Acion. 02', image: IMG('xlt.editar.tipo.acion2.png') },
+                    { label: 'Nome Acion. 01', image: IMG('xlt.editar.nome.acion1.png') },
+                    { label: 'Nome Acion. 02', image: IMG('xlt.editar.nome.acion2.png') },
+                    { label: 'Tempo Acion. 01', image: IMG('xlt.editar.tempo.acio1..png') },
+                    { label: 'Tempo Acion. 02', image: IMG('xlt.editar.tempo.acion2.png') },
+                    { label: 'Tempo Sens. 01', image: IMG('xlt.editar.tempo.sens1.png') },
+                    { label: 'Tempo Sens. 02', image: IMG('xlt.editar.tempo.sens2.png') },
+                    { label: 'Intertravamento', image: IMG('xlt.editar.intertravamento.png') },
+                    { label: 'Botoeira', image: IMG('xlt.editar.botoeira.png') },
+                    { label: 'Eventos de Botão', image: IMG('xlt.editar.eventos.de.bot.png') },
+                    { label: 'Arrombamento', image: IMG('xlt.editar.arrombamento.png') },
+                    { label: 'Função (Acesso/Coletor)', image: IMG('xlt.editar.funcao.png') },
+                  ],
+                },
+                {
+                  value: 'xre',
+                  label: 'XRE',
+                  gallery: [
+                    { label: 'Nome do Dispositivo', image: IMG('xre.editar.nome.png') },
+                    { label: 'Tipo Acion. 01', image: IMG('xre.editar.tipo.acion1.png') },
+                    { label: 'Tipo Acion. 02', image: IMG('xre.editar.tipo.acion2.png') },
+                    { label: 'Nome Acion. 01', image: IMG('xre.editar.nome.acion1.png') },
+                    { label: 'Nome Acion. 02', image: IMG('xre.editar.nome.acion2.png') },
+                    { label: 'Tempo Acion. 01', image: IMG('xre.editar.tempo.acio1..png') },
+                    { label: 'Tempo Acion. 02', image: IMG('xre.editar.tempo.acion2.png') },
+                    { label: 'Tempo Sens. 01', image: IMG('xre.editar.tempo.sens1.png') },
+                    { label: 'Tempo Sens. 02', image: IMG('xre.editar.tempo.sens2.png') },
+                    { label: 'Intertravamento', image: IMG('xre.editar.intertravamento.png') },
+                    { label: 'Botoeira', image: IMG('xre.editar.botoeira.png') },
+                    { label: 'Eventos de Botão', image: IMG('xre.editar.eventos.de.bot.png') },
+                    { label: 'Arrombamento', image: IMG('xre.editar.arrombamento.png') },
+                    { label: 'Carona', image: IMG('xre.editar.carona.png') },
+                  ],
+                },
+                {
+                  value: 'xpe',
+                  label: 'XPE',
+                  gallery: [
+                    { label: 'Nome do Dispositivo', image: IMG('dispositivo-editar-mip-nome.jpeg') },
+                    { label: 'Tipo Acion. 01 (XPE)', image: IMG('dispositivo-editar-xle-tipo-acion01.jpeg') },
+                    { label: 'Intertravamento', image: IMG('dispositivo-editar-intertravamento.jpeg') },
+                  ],
+                },
+                {
+                  value: 'ss311-3420-3430',
+                  label: 'SS 311/3420/3430',
+                  gallery: [
+                    { label: 'Nome do Dispositivo', image: IMG('dispositivo-editar-mip-nome.jpeg') },
+                    { label: 'Botoeira', image: IMG('dispositivo-editar-botoeira.jpeg') },
+                    { label: 'Eventos de Botão', image: IMG('dispositivo-editar-eventos-bot.jpeg') },
+                    { label: 'Arrombamento', image: IMG('dispositivo-editar-arrombamento.jpeg') },
+                    { label: 'Função (Acesso/Coletor)', image: IMG('dispositivo-editar-funcao.jpeg') },
+                  ],
+                },
+                {
+                  value: 'ct',
+                  label: 'CT',
+                  gallery: [
+                    { label: 'Nome do Dispositivo', image: IMG('dispositivo-editar-mip-nome.jpeg') },
+                    { label: 'Tipo Acion. 01', image: IMG('dispositivo-editar-xle-tipo-acion01.jpeg') },
+                    { label: 'Intertravamento', image: IMG('dispositivo-editar-intertravamento.jpeg') },
+                  ],
+                },
+                {
+                  value: 'ss-faciais',
+                  label: 'SS (faciais)',
+                  gallery: [
+                    { label: 'Nome do Dispositivo', image: IMG('dispositivo-editar-mip-nome.jpeg') },
+                    { label: 'Botoeira', image: IMG('dispositivo-editar-botoeira.jpeg') },
+                    { label: 'Eventos de Botão', image: IMG('dispositivo-editar-eventos-bot.jpeg') },
+                    { label: 'Arrombamento', image: IMG('dispositivo-editar-arrombamento.jpeg') },
+                    { label: 'Função (Acesso/Coletor)', image: IMG('dispositivo-editar-funcao.jpeg') },
+                  ],
+                },
+              ],
+              sections: [
+                { title: 'MIP 1000 IP', content: 'Nome, Nome Acion. 01 / Tempo Acion. 01 / Tempo Sens. 01, Nome Acion. 02 / Tempo Acion. 02 / Tempo Sens. 02, Intertravamento (Desabilitado / Habilitado)', type: 'info' },
+                { title: 'XLT', content: 'Nome, Acion. 01 e 02 com Tipo (Chav./Senha / Somente Senha / Somente Chav.), Intertravamento', type: 'info' },
+                { title: 'SS 35xx — Faciais', content: 'Nome, Acion. 01 e 02 (Tipo: botoeira / sen.1&fech.1 / sen.2&fech.2 / desabilitado), Intertravamento, Eventos de Botão, Arrombamento, Carona', type: 'info' },
+                { title: 'XRE', content: 'Nome, Acion. 01 e 02 (Tipo: Botão Power / A / B / C / Nenhum tipo), Intertravamento, Botoeira, Eventos de Botão, Arrombamento, Carona', type: 'info' },
+                { title: 'Obs. — Acionamento', content: 'Dispositivos com um relé (SS 3420, SS 3540...) Terão apenas uma opçãp para os seguintes menus:, Nome acion, Tempo acion, Tempo Sens, Tipo acion. ', type: 'note' },
+              ],
+            },
+          },
+          {
+            id: 'mip-cadastro-dispositivo-consultar',
+            label: 'Consultar',
+            path: '/cadastro/dispositivo/consultar',
+            content: {
+              title: 'Consultar Dispositivo',
+              description: 'Exibe as configurações detalhadas de um dispositivo cadastrado: nome, tipo, versão, endereço e configurações de acionamento.',
+              menuPath: 'Cadastro > Dispositivo > Consultar',
+              image: IMG('dispositivo-consultar.jpeg'),
+              manualPdf: MANUAL_PDF,
+              gallery: [
+                { label: 'Selecionar Dispositivo para Consultar', image: IMG('dispositivo-consultar.jpeg') },
+                { label: 'Dados do MIP 1000 IP', image: IMG('dispositivo-editar-mip-nome.jpeg') },
+                { label: 'Dados do Dispositivo (Tipo/Versão/Endereço)', image: IMG('dispositivo-editar-xlt-nome.jpeg') },
+              ],
+              sections: [
+                { title: 'MIP 1000 IP — Dados exibidos', content: 'Nome, Tipo/Versão/Endereço, Nome Acion.01, Tempo Acion.01, Tempo Sens.01, Nome Acion.02, Tempo Acion.02, Tempo Sens.02', type: 'info' },
+                { title: 'XLT / XRE — Dados exibidos', content: 'Nome, Tipo/Versão/Endereço, Nome e Tipo Acion. 01 e 02, Tempos, Intertravamento, Botoeira, Eventos de Botão, Arrombamento, Função', type: 'info' },
+              ],
+            },
+          },
+          {
+            id: 'mip-cadastro-dispositivo-excluir',
+            label: 'Excluir',
+            path: '/cadastro/dispositivo/excluir',
+            content: {
+              title: 'Excluir Dispositivo',
+              description: 'Remove um dispositivo cadastrado do sistema. Após a exclusão, o dispositivo não será mais acessado pelo MIP e todos os usuários terão acesso bloqueado neste dispositivo.',
+              menuPath: 'Cadastro > Dispositivo > Excluir',
+              image: IMG('dispositivo-excluir.jpeg'),
+              manualPdf: MANUAL_PDF,
+              sections: [
+                { title: 'Atenção', content: 'Ao excluir um dispositivo, todos os usuários perderão acesso a ele imediatamente. Se o dispositivo permanecer no barramento com firmware atualizado, poderá ser incluído novamente.', type: 'warning' },
+              ],
+            },
+          },
+        ],
+      },
+
+      // 1.3 Chaveiro(s)
+      {
+        id: 'mip-cadastro-chaveiro',
+        label: 'Chaveiro(s)',
+        path: '/cadastro/chaveiro',
+        content: {
+          title: 'Chaveiro(s)',
+          description: 'Gerenciamento de chaveiros RFID Mifare (13,56 MHz). Permite incluir novos chaveiros por aproximação ao leitor ou digitando o código hexadecimal manualmente. O nome desta opção pode ser personalizado via Rótulos.',
+          menuPath: 'Cadastro > Chaveiro(s)',
+          image: IMG('cadastro-chaveiro.jpeg'),
+          manualPdf: MANUAL_PDF,
+          sections: [{ title: 'Operações disponíveis', content: 'Incluir Novo, Editar, Consultar, Excluir', type: 'info' }],
+        },
+        children: [
+          {
+            id: 'mip-cadastro-chaveiro-incluir',
+            label: 'Incluir Novo',
+            path: '/cadastro/chaveiro/incluir',
+            content: {
+              title: 'Incluir Chaveiro',
+              description: 'Vincula um novo chaveiro RFID a um usuário já cadastrado. O chaveiro pode ser lido por aproximação no MIP ou em dispositivos compatíveis. O código também pode ser digitado manualmente em formato hexadecimal.',
+              menuPath: 'Cadastro > Chaveiro(s) > Incluir Novo',
+              image: IMG('chaveiro-incluir.jpeg'),
+              manualPdf: MANUAL_PDF,
+              sections: [
+                { title: 'Leitores compatíveis para captura', content: 'MIP 1000 IP, XPE PLUS ID, XLT 1000 ID, CT 500 1P, CT 3000 2PB', type: 'info' },
+                { title: 'Dados opcionais do veículo', content: 'Carro (Modelo), Carro (Marca), Carro (Cor), Carro (Placa)', type: 'info' },
+              ],
+            },
+          },
+          {
+            id: 'mip-cadastro-chaveiro-editar',
+            label: 'Editar',
+            path: '/cadastro/chaveiro/editar',
+            content: {
+              title: 'Editar Chaveiro',
+              description: 'Permite alterar o código hexadecimal e os dados do veículo de um chaveiro já cadastrado.',
+              menuPath: 'Cadastro > Chaveiro(s) > Editar',
+              image: IMG('chaveiro-editar.jpeg'),
+              manualPdf: MANUAL_PDF,
+              sections: [
+                { title: 'Campos editáveis', content: 'Código Hex do Chaveiro, Carro (Modelo), Carro (Marca), Carro (Cor), Carro (Placa)', type: 'info' },
+              ],
+            },
+          },
+          {
+            id: 'mip-cadastro-chaveiro-consultar',
+            label: 'Consultar',
+            path: '/cadastro/chaveiro/consultar',
+            content: {
+              title: 'Consultar Chaveiro',
+              description: 'Exibe todas as informações de um chaveiro cadastrado para determinado usuário, incluindo código hexadecimal e dados do veículo.',
+              menuPath: 'Cadastro > Chaveiro(s) > Consultar',
+              image: IMG('chaveiro-consultar.jpeg'),
+              manualPdf: MANUAL_PDF,
+            },
+          },
+          {
+            id: 'mip-cadastro-chaveiro-excluir',
+            label: 'Excluir',
+            path: '/cadastro/chaveiro/excluir',
+            content: {
+              title: 'Excluir Chaveiro',
+              description: 'Remove um chaveiro de um usuário. Exibe a lista de chaveiros cadastrados e solicita confirmação antes de excluir.',
+              menuPath: 'Cadastro > Chaveiro(s) > Excluir',
+              image: IMG('chaveiro-excluir.jpeg'),
+              manualPdf: MANUAL_PDF,
+              sections: [{ title: 'Confirmação', content: 'O sistema exibe "Tem certeza?" com o código do chaveiro. Pressione Enter para confirmar ou ESC para cancelar.', type: 'warning' }],
+            },
+          },
+        ],
+      },
+
+      // 1.4 Controle(s)
+      {
+        id: 'mip-cadastro-controle',
+        label: 'Controle(s)',
+        path: '/cadastro/controle',
+        content: {
+          title: 'Controle(s)',
+          description: 'Gerenciamento de controles remotos XTR 1000. A associação é feita mantendo o botão B do controle pressionado por ~4 segundos até o MIP confirmar. O nome desta opção pode ser personalizado via Rótulos.',
+          menuPath: 'Cadastro > Controle(s)',
+          image: IMG('cadastro-controle.jpeg'),
+          manualPdf: MANUAL_PDF,
+          sections: [{ title: 'Operações disponíveis', content: 'Incluir Novo, Editar, Consultar, Excluir', type: 'info' }],
+        },
+        children: [
+          {
+            id: 'mip-cadastro-controle-incluir',
+            label: 'Incluir Novo',
+            path: '/cadastro/controle/incluir',
+            content: {
+              title: 'Incluir Controle',
+              description: 'Vincula um novo controle remoto XTR 1000 a um usuário cadastrado. Mantenha o botão B pressionado por ~4 segundos até o MIP confirmar a associação.',
+              menuPath: 'Cadastro > Controle(s) > Incluir Novo',
+              image: IMG('controle-incluir.jpeg'),
+              manualPdf: MANUAL_PDF,
+              sections: [
+                { title: 'Passo a passo', content: '1) Buscar usuário por Nome ou Apto. 2) Manter o botão B pressionado por ~4 segundos até "Controle Associado". 3) Preencher dados opcionais do veículo.', type: 'info' },
+                { title: 'Dados opcionais do veículo', content: 'Carro (Modelo), Carro (Marca), Carro (Cor), Carro (Placa)', type: 'info' },
+              ],
+            },
+          },
+          {
+            id: 'mip-cadastro-controle-editar',
+            label: 'Editar',
+            path: '/cadastro/controle/editar',
+            content: {
+              title: 'Editar Controle',
+              description: 'Permite alterar o código e os dados do veículo de um controle remoto já cadastrado.',
+              menuPath: 'Cadastro > Controle(s) > Editar',
+              image: IMG('controle-editar.jpeg'),
+              manualPdf: MANUAL_PDF,
+              sections: [
+                { title: 'Campos editáveis', content: 'Código Hex do Controle, Carro (Modelo), Carro (Marca), Carro (Cor), Carro (Placa)', type: 'info' },
+              ],
+            },
+          },
+          {
+            id: 'mip-cadastro-controle-consultar',
+            label: 'Consultar',
+            path: '/cadastro/controle/consultar',
+            content: {
+              title: 'Consultar Controle',
+              description: 'Exibe todas as informações de um controle remoto cadastrado para determinado usuário.',
+              menuPath: 'Cadastro > Controle(s) > Consultar',
+              image: IMG('controle-consultar.jpeg'),
+              manualPdf: MANUAL_PDF,
+            },
+          },
+          {
+            id: 'mip-cadastro-controle-excluir',
+            label: 'Excluir',
+            path: '/cadastro/controle/excluir',
+            content: {
+              title: 'Excluir Controle',
+              description: 'Remove um controle remoto de um usuário. Exibe a lista de controles cadastrados e solicita confirmação antes de concluir a exclusão.',
+              menuPath: 'Cadastro > Controle(s) > Excluir',
+              image: IMG('controle-excluir.jpeg'),
+              manualPdf: MANUAL_PDF,
+              sections: [{ title: 'Confirmação', content: 'O sistema exibe "Tem certeza?" com o código do controle. Pressione Enter para confirmar ou ESC para cancelar.', type: 'warning' }],
+            },
+          },
+        ],
+      },
+
+      // 1.5 Digital(is)
+      {
+        id: 'mip-cadastro-digital',
+        label: 'Digital(is)',
+        path: '/cadastro/digital',
+        content: {
+          title: 'Digital(is)',
+          description: 'Gerenciamento de impressões digitais dos usuários. O cadastro é feito capturando a digital 3 vezes no leitor biométrico. Cada digital pode ser Normal ou de Pânico. O MIP suporta até 4.000 digitais. O nome desta opção pode ser personalizado via Rótulos.',
+          menuPath: 'Cadastro > Digital(is)',
+          image: IMG('cadastro-digital.jpeg'),
+          manualPdf: MANUAL_PDF,
+          sections: [
+            { title: 'Operações disponíveis', content: 'Incluir Novo, Editar, Consultar, Excluir', type: 'info' },
+            { title: 'Capacidade', content: 'O MIP 1000 IP suporta até 4.000 digitais. Os dispositivos biométricos integrados têm capacidades individuais menores (ex.: Bio Inox SS 311 MF: até 1.499 digitais).', type: 'warning' },
+          ],
+        },
+        children: [
+          {
+            id: 'mip-cadastro-digital-incluir',
+            label: 'Incluir Novo',
+            path: '/cadastro/digital/incluir',
+            content: {
+              title: 'Incluir Digital',
+              description: 'Cadastra uma nova impressão digital. O sistema aguarda até 30 segundos para a captura em 3 etapas no leitor biométrico selecionado. Após a captura, define o tipo (Normal ou Pânico).',
+              menuPath: 'Cadastro > Digital(is) > Incluir Novo',
+              image: IMG('digital-incluir.jpeg'),
+              manualPdf: MANUAL_PDF,
+              sections: [
+                { title: 'Tipo de digital', content: 'Normal: uso padrão para acesso. Pânico: ativa alerta silencioso para o porteiro ao ser utilizada. Disponível apenas para usuários do tipo Morador.', type: 'info' },
+                { title: 'Dados opcionais do veículo', content: 'Carro (Modelo), Carro (Marca), Carro (Cor), Carro (Placa)', type: 'info' },
+              ],
+            },
+          },
+          {
+            id: 'mip-cadastro-digital-editar',
+            label: 'Editar',
+            path: '/cadastro/digital/editar',
+            content: {
+              title: 'Editar Digital',
+              description: 'Permite alterar o tipo (Normal/Pânico) e os dados do veículo de uma digital já cadastrada.',
+              menuPath: 'Cadastro > Digital(is) > Editar',
+              image: IMG('digital-editar.jpeg'),
+              manualPdf: MANUAL_PDF,
+              sections: [{ title: 'Campos editáveis', content: 'Tipo (Normal / Pânico), Carro (Modelo), Carro (Marca), Carro (Cor), Carro (Placa)', type: 'info' }],
+            },
+          },
+          {
+            id: 'mip-cadastro-digital-consultar',
+            label: 'Consultar',
+            path: '/cadastro/digital/consultar',
+            content: {
+              title: 'Consultar Digital',
+              description: 'Exibe as digitais cadastradas de um usuário, incluindo o tipo e os dados do veículo associado.',
+              menuPath: 'Cadastro > Digital(is) > Consultar',
+              image: IMG('digital-consultar.jpeg'),
+              manualPdf: MANUAL_PDF,
+            },
+          },
+          {
+            id: 'mip-cadastro-digital-excluir',
+            label: 'Excluir',
+            path: '/cadastro/digital/excluir',
+            content: {
+              title: 'Excluir Digital',
+              description: 'Remove uma digital de um usuário. Exibe a lista de digitais cadastradas e solicita confirmação antes de excluir.',
+              menuPath: 'Cadastro > Digital(is) > Excluir',
+              image: IMG('digital-excluir.jpeg'),
+              manualPdf: MANUAL_PDF,
+              sections: [{ title: 'Confirmação', content: 'O sistema exibe "Tem certeza?" com o ID da digital. Pressione Enter para confirmar ou ESC para cancelar.', type: 'warning' }],
+            },
+          },
+        ],
+      },
+
+      // 1.6 Face(s)
+      {
+        id: 'mip-cadastro-face',
+        label: 'Face(s)',
+        path: '/cadastro/face',
+        content: {
+          title: 'Face(s)',
+          description: 'Gerenciamento de faces (reconhecimento facial). O cadastro é realizado via dispositivo facial SS 3530/3540 MF. O MIP aguarda 45 segundos para a pessoa se posicionar diante do equipamento. Suporta até 4.000 faces. O nome desta opção pode ser personalizado via Rótulos.',
+          menuPath: 'Cadastro > Face(s)',
+          image: IMG('cadastro-face.jpeg'),
+          manualPdf: MANUAL_PDF,
+          sections: [{ title: 'Operações disponíveis', content: 'Incluir Novo, Editar, Consultar, Excluir', type: 'info' }],
+        },
+        children: [
+          {
+            id: 'mip-cadastro-face-incluir',
+            label: 'Incluir Novo',
+            path: '/cadastro/face/incluir',
+            content: {
+              title: 'Incluir Face',
+              description: 'Cadastra o reconhecimento facial de um usuário. O MIP aguarda 45 segundos enquanto a pessoa se posiciona diante do dispositivo facial para captura da imagem.',
+              menuPath: 'Cadastro > Face(s) > Incluir Novo',
+              image: IMG('face-incluir.jpeg'),
+              manualPdf: MANUAL_PDF,
+              sections: [
+                { title: 'Passo a passo', content: '1) Buscar usuário por Nome ou Apto. 2) Escolher o leitor facial. 3) Aguardar até 45s — posicionar diante do facial e pressionar "Gravar". 4) Preencher dados opcionais do veículo.', type: 'info' },
+                { title: 'Orientações para o cadastro facial', content: 'Óculos, chapéus e barbas podem afetar o reconhecimento. Mantenha o rosto visível e frontal, olhos abertos e expressão neutra. Evite sombras e fundos com movimento. Apenas um rosto por captura.', type: 'tip' },
+                { title: 'Dados opcionais do veículo', content: 'Carro (Modelo), Carro (Marca), Carro (Cor), Carro (Placa)', type: 'info' },
+              ],
+            },
+          },
+          {
+            id: 'mip-cadastro-face-editar',
+            label: 'Editar',
+            path: '/cadastro/face/editar',
+            content: {
+              title: 'Editar Face',
+              description: 'Permite alterar os dados do veículo associados a uma face já cadastrada.',
+              menuPath: 'Cadastro > Face(s) > Editar',
+              image: IMG('face-editar.jpeg'),
+              manualPdf: MANUAL_PDF,
+              sections: [{ title: 'Campos editáveis', content: 'Carro (Modelo), Carro (Marca), Carro (Cor), Carro (Placa)', type: 'info' }],
+            },
+          },
+          {
+            id: 'mip-cadastro-face-consultar',
+            label: 'Consultar',
+            path: '/cadastro/face/consultar',
+            content: {
+              title: 'Consultar Face',
+              description: 'Exibe as faces cadastradas de um usuário e os dados do veículo associado.',
+              menuPath: 'Cadastro > Face(s) > Consultar',
+              image: IMG('face-consultar.jpeg'),
+              manualPdf: MANUAL_PDF,
+            },
+          },
+          {
+            id: 'mip-cadastro-face-excluir',
+            label: 'Excluir',
+            path: '/cadastro/face/excluir',
+            content: {
+              title: 'Excluir Face',
+              description: 'Remove uma face de um usuário. Exibe a lista de faces cadastradas e solicita confirmação antes de excluir.',
+              menuPath: 'Cadastro > Face(s) > Excluir',
+              image: IMG('face-excluir.jpeg'),
+              manualPdf: MANUAL_PDF,
+              sections: [{ title: 'Confirmação', content: 'O sistema exibe "Tem certeza?" antes de excluir a face. Pressione Enter para confirmar ou ESC para cancelar.', type: 'warning' }],
+            },
+          },
+        ],
+      },
+    ],
+  },
+
+  // ── 2. EVENTOS ────────────────────────────────────────────────────────────
+  {
+    id: 'mip-eventos',
+    label: 'Eventos',
+    path: '/eventos',
+    content: {
+      title: 'Eventos',
+      description: 'Registros de todas as ocorrências do sistema: acessos liberados ou negados por senha, chaveiro, digital, face ou controle; pânicos, arrombamentos, tamperings, alertas de porteiro, carona e acionamentos remotos.',
+      menuPath: 'Menu Principal > Eventos',
+      image: IMG('eventos.jpeg'),
+      manualPdf: MANUAL_PDF,
+      sections: [
+        { title: 'Tipos de eventos registrados', content: 'Acesso liberado/negado (Senha, Chaveiro, Digital, Face, Controle), Acesso via Apto (XPE), Teclas AC, Acionamento Remoto (SGA), Pânico, Tamper, Arrombamento, Carona, Porteiro Alerta.', type: 'info' },
+        { title: 'Limite de exibição', content: 'Em todas as opções serão exibidos os últimos 26 eventos de seu respectivo filtro.', type: 'note' },
+      ],
+    },
+    children: [
+      {
+        id: 'mip-eventos-ultimos',
+        label: 'Últimos eventos',
+        path: '/eventos/ultimos',
+        content: {
+          title: 'Últimos Eventos',
+          description: 'Exibe os 26 eventos mais recentes de todo o sistema, independente do usuário ou dispositivo. Mostra data, hora, tipo do evento, usuário e dispositivo envolvido.',
+          menuPath: 'Eventos > Últimos eventos',
+          image: IMG('eventos-ultimos.jpeg'),
+          manualPdf: MANUAL_PDF,
+          sections: [{ title: 'Informações exibidas', content: 'Data e hora, Nome do usuário, Apto, Nome do dispositivo acionado, Tipo do evento (Acesso Liberado, Acesso Negado, Pânico, etc.)', type: 'info' }],
+        },
+      },
+      {
+        id: 'mip-eventos-por-usuario',
+        label: 'Por usuário',
+        path: '/eventos/por-usuario',
+        content: {
+          title: 'Eventos por Usuário',
+          description: 'Filtra e exibe os 26 últimos eventos de um usuário específico. A busca pode ser feita por nome ou número do apartamento.',
+          menuPath: 'Eventos > Por usuário',
+          image: IMG('eventos-por-usuario.jpeg'),
+          manualPdf: MANUAL_PDF,
+          sections: [{ title: 'Busca', content: 'Localizar por Nome ou Apto', type: 'info' }],
+        },
+      },
+      {
+        id: 'mip-eventos-por-dispositivo',
+        label: 'Por dispositivo',
+        path: '/eventos/por-dispositivo',
+        content: {
+          title: 'Eventos por Dispositivo',
+          description: 'Filtra e exibe os 26 últimos eventos de um dispositivo específico cadastrado no sistema.',
+          menuPath: 'Eventos > Por dispositivo',
+          image: IMG('eventos-por-dispositivo.jpeg'),
+          manualPdf: MANUAL_PDF,
+          sections: [{ title: 'Busca', content: 'Selecionar o nome do dispositivo na lista de dispositivos cadastrados.', type: 'info' }],
+        },
+      },
+    ],
+  },
+
+  // ── 3. NOTIFICAÇÕES ───────────────────────────────────────────────────────
+  {
+    id: 'mip-notificacoes',
+    label: 'Notificações',
+    path: '/notificacoes',
+    content: {
+      title: 'Notificações',
+      description: 'Exibe alertas ativos do sistema: bateria baixa em controles remotos e dispositivos com timeout de comunicação no barramento RS-485. Quando o ícone de notificação aparece na tela inicial, pressione a tecla 2 para visualizá-las.',
+      menuPath: 'Menu Principal > Notificações',
+      image: IMG('notificacoes.jpeg'),
+      manualPdf: MANUAL_PDF,
+      sections: [{ title: 'Acesso rápido', content: 'Na tela inicial do MIP, pressione a tecla 2 quando o ícone de notificação estiver visível para acessar os alertas do sistema.', type: 'tip' }],
+    },
+    children: [
+      {
+        id: 'mip-notificacoes-bateria-baixa',
+        label: 'Bateria baixa',
+        path: '/notificacoes/bateria-baixa',
+        content: {
+          title: 'Bateria Baixa',
+          description: 'Informa quais moradores possuem controles remotos XTR 1000 com nível de bateria baixo. Permite identificar rapidamente quais usuários precisam trocar a bateria.',
+          menuPath: 'Notificações > Bateria baixa',
+          image: IMG('notificacoes-bateria-baixa.jpeg'),
+          manualPdf: MANUAL_PDF,
+          sections: [{ title: 'Informações exibidas', content: 'Lista de moradores com o nome do dispositivo (controle) com bateria fraca.', type: 'info' }],
+        },
+      },
+      {
+        id: 'mip-notificacoes-dispositivo',
+        label: 'Dispositivo',
+        path: '/notificacoes/dispositivo',
+        content: {
+          title: 'Notificações de Dispositivo',
+          description: 'Mostra os dispositivos do barramento RS-485 que estão em estado de timeout — sem resposta ao MIP. Permite identificar equipamentos com falha de comunicação ou desligados.',
+          menuPath: 'Notificações > Dispositivo',
+          image: IMG('notificacoes-dispositivo.jpeg'),
+          manualPdf: MANUAL_PDF,
+          sections: [
+            { title: 'Informações exibidas', content: 'Lista de dispositivos com timeout de comunicação, exibindo o nome do dispositivo.', type: 'info' },
+            { title: 'Dica de suporte', content: 'Use o teste de barramento RS-485 (tecla 7 na tela inicial) para analisar a qualidade da comunicação com cada dispositivo e identificar a causa do timeout.', type: 'tip' },
+          ],
+        },
+      },
+    ],
+  },
+
+  // ── 4. CONFIG. TECLAS ─────────────────────────────────────────────────────
+  {
+    id: 'mip-config-teclas',
+    label: 'Config. Teclas',
+    path: '/config-teclas',
+    content: {
+      title: 'Config. Teclas',
+      description: 'Configura as teclas de acionamento rápido AC1 a AC5 do MIP 1000 IP. Cada tecla pode ser associada a um dispositivo cadastrado para acionamento direto pelo porteiro/vigilante, sem necessidade de autenticação.',
+      menuPath: 'Menu Principal > Config. Teclas',
+      image: IMG('config-teclas.jpeg'),
+      manualPdf: MANUAL_PDF,
+      sections: [
+        { title: 'Teclas configuráveis', content: 'AC1, AC2, AC3, AC4, AC5', type: 'info' },
+        { title: 'Registro de eventos', content: 'O acionamento via teclas AC gera evento registrado como "Tecla AC X — Dispositivo — Saída".', type: 'note' },
+      ],
+    },
+    children: [
+      { id: 'mip-config-teclas-ac1', label: 'Tecla AC1', path: '/config-teclas/ac1', content: { title: 'Tecla AC1', description: 'Configura a tecla de acionamento rápido AC1, vinculando-a a um dispositivo cadastrado para acionamento direto pelo operador do MIP.', menuPath: 'Config. Teclas > Tecla AC1', image: IMG('config-tecla-ac1.jpeg'), manualPdf: MANUAL_PDF, sections: [{ title: 'Configuração', content: 'Selecionar o dispositivo cadastrado que será acionado ao pressionar a tecla AC1.', type: 'info' }] } },
+      { id: 'mip-config-teclas-ac2', label: 'Tecla AC2', path: '/config-teclas/ac2', content: { title: 'Tecla AC2', description: 'Configura a tecla de acionamento rápido AC2, vinculando-a a um dispositivo cadastrado.', menuPath: 'Config. Teclas > Tecla AC2', image: IMG('config-tecla-ac2.jpeg'), manualPdf: MANUAL_PDF } },
+      { id: 'mip-config-teclas-ac3', label: 'Tecla AC3', path: '/config-teclas/ac3', content: { title: 'Tecla AC3', description: 'Configura a tecla de acionamento rápido AC3, vinculando-a a um dispositivo cadastrado.', menuPath: 'Config. Teclas > Tecla AC3', image: IMG('config-tecla-ac3.jpeg'), manualPdf: MANUAL_PDF } },
+      { id: 'mip-config-teclas-ac4', label: 'Tecla AC4', path: '/config-teclas/ac4', content: { title: 'Tecla AC4', description: 'Configura a tecla de acionamento rápido AC4, vinculando-a a um dispositivo cadastrado.', menuPath: 'Config. Teclas > Tecla AC4', image: IMG('config-tecla-ac4.jpeg'), manualPdf: MANUAL_PDF } },
+      { id: 'mip-config-teclas-ac5', label: 'Tecla AC5', path: '/config-teclas/ac5', content: { title: 'Tecla AC5', description: 'Configura a tecla de acionamento rápido AC5, vinculando-a a um dispositivo cadastrado.', menuPath: 'Config. Teclas > Tecla AC5', image: IMG('config-tecla-ac5.jpeg'), manualPdf: MANUAL_PDF } },
+    ],
+  },
+
+  // ── 5. CONFIG. SISTEMA ────────────────────────────────────────────────────
+  {
+    id: 'mip-config-sistema',
+    label: 'Config. Sistema',
+    path: '/config-sistema',
+    content: {
+      title: 'Config. Sistema',
+      description: 'Menu de configurações gerais do MIP 1000 IP: data/hora, dados do condomínio, login e permissões, porteiro alerta, pânico, mensagem de descanso, alertas sonoros, rótulos, modo de cadastro, temporizações, rede IP, feriados, backup e reset geral.',
+      menuPath: 'Menu Principal > Config. Sistema',
+      image: IMG('config-sistema.jpeg'),
+      manualPdf: MANUAL_PDF,
+    },
+    children: [
+      // 5.1 Data e Hora
+      {
+        id: 'mip-config-sistema-data-hora',
+        label: 'Data e Hora',
+        path: '/config-sistema/data-hora',
+        content: {
+          title: 'Data e Hora',
+          description: 'Define a data e hora do MIP 1000 IP. A hora correta é essencial para a integridade dos registros de eventos.',
+          menuPath: 'Config. Sistema > Data e Hora',
+          image: IMG('config-data-hora.jpeg'),
+          manualPdf: MANUAL_PDF,
+          sections: [{ title: 'Campos', content: 'Data (DD/MM/AA), Hora (HH:MM)', type: 'info' }],
+        },
+      },
+      // 5.2 Condomínio
+      {
+        id: 'mip-config-sistema-condominio',
+        label: 'Condomínio',
+        path: '/config-sistema/condominio',
+        content: {
+          title: 'Condomínio',
+          description: 'Armazena os dados cadastrais do condomínio. O nome é exibido na tela inicial do MIP — aceita 34 caracteres, mas apenas os 21 primeiros são visíveis no display.',
+          menuPath: 'Config. Sistema > Condomínio',
+          image: IMG('config-condominio.jpeg'),
+          manualPdf: MANUAL_PDF,
+          sections: [
+            { title: 'Campos', content: 'Nome (exibido no display), Responsável, E-mail, Telefone, Rua, Bairro, Número, CNPJ', type: 'info' },
+            { title: 'Exibição no display', content: 'O nome aceita 34 caracteres, porém apenas os 21 primeiros são mostrados no display do MIP.', type: 'note' },
+          ],
+        },
+      },
+      // 5.3 Config. Login
+      {
+        id: 'mip-config-sistema-login',
+        label: 'Config. de Login',
+        path: '/config-sistema/login',
+        content: {
+          title: 'Config. de Login',
+          description: 'Gerencia as credenciais de acesso ao menu do MIP. Permite trocar a senha do administrador e configurar usuários com permissões de acesso, definindo até 4 níveis.',
+          menuPath: 'Config. Sistema > Config. de Login',
+          image: IMG('config-login.jpeg'),
+          manualPdf: MANUAL_PDF,
+          sections: [
+            { title: 'Operações', content: 'Trocar Senha (admin), Buscar Usuário (para configurar login)', type: 'info' },
+            { title: 'Níveis de permissão', content: 'Nível 1: acesso completo. Nível 2: usuários e eventos/notificações. Nível 3: eventos e notificações. Nível 4: apenas eventos.', type: 'info' },
+            { title: 'Senha padrão de fábrica', content: 'Login: admin | Senha: 123456. Aceita de 1 a 6 caracteres. Usuários Nível 1 podem acessar o menu com chaveiro RFID.', type: 'tip' },
+          ],
+        },
+        children: [
+          {
+            id: 'mip-config-login-trocar-senha',
+            label: 'Trocar senha',
+            path: '/config-sistema/login/trocar-senha',
+            content: {
+              title: 'Trocar Senha do Administrador',
+              description: 'Altera a senha de acesso ao menu do MIP (login admin). A senha padrão de fábrica é 123456. A nova senha deve ter de 1 a 6 caracteres.',
+              menuPath: 'Config. Sistema > Config. de Login > Trocar Senha',
+              image: IMG('config-login-trocar-senha.jpeg'),
+              manualPdf: MANUAL_PDF,
+              sections: [{ title: 'Campos', content: 'Login (admin), Senha (1–6 caracteres)', type: 'info' }],
+            },
+          },
+          {
+            id: 'mip-config-login-buscar-usuario',
+            label: 'Buscar usuário',
+            path: '/config-sistema/login/buscar-usuario',
+            content: {
+              title: 'Configurar Login de Usuário',
+              description: 'Permite que moradores já cadastrados acessem o menu do MIP com login e senha próprios, com nível de permissão definido pelo administrador (Nível 1 a 4).',
+              menuPath: 'Config. Sistema > Config. de Login > Buscar Usuário',
+              image: IMG('config-login-buscar-usuario.jpeg'),
+              manualPdf: MANUAL_PDF,
+              sections: [
+                { title: 'Campos', content: 'Nome (busca), Login, Senha, Nível de Usuário (Nível 1 ao 4)', type: 'info' },
+                { title: 'Nível 1 — Acesso por Chaveiro', content: 'Usuários configurados como Nível 1 podem acessar o menu utilizando seu chaveiro RFID (Mifare), sem necessidade de digitar login.', type: 'tip' },
+              ],
+            },
+          },
+        ],
+      },
+      // 5.4 Porteiro Alerta
+      {
+        id: 'mip-config-sistema-porteiro-alerta',
+        label: 'Porteiro Alerta',
+        path: '/config-sistema/porteiro-alerta',
+        content: {
+          title: 'Porteiro Alerta',
+          description: 'Configura alertas sonoros periódicos para manter o porteiro/vigilante atento durante o turno de serviço. Emite alertas em intervalos regulares dentro de uma faixa de horário. A ativação e desativação geram eventos registrados.',
+          menuPath: 'Config. Sistema > Porteiro Alerta',
+          image: IMG('config-porteiro-alerta.jpeg'),
+          manualPdf: MANUAL_PDF,
+          sections: [
+            { title: 'Campos', content: 'Hora Inicial, Hora Final, Intervalo (0 = desativado; 15 a 120 minutos), Saída Acionada (Saída01 / Saída02 / Nenhum), Desativação (Cancelar e Chav. / Somente Cancelar / Somente Chav.)', type: 'info' },
+            { title: 'Como desativar', content: 'Definir o Intervalo igual a Zero desativa completamente o Porteiro Alerta.', type: 'tip' },
+          ],
+        },
+      },
+      // 5.5 Pânico
+      {
+        id: 'mip-config-sistema-panico',
+        label: 'Pânico',
+        path: '/config-sistema/panico',
+        content: {
+          title: 'Pânico',
+          description: 'Configura a função de acionamento de pânico. Quando ativado, gera alerta visual no display do MIP (e sonoro, se habilitado), registra um evento e pode acionar uma saída. Disponível apenas para usuários do tipo Morador.',
+          menuPath: 'Config. Sistema > Pânico',
+          image: IMG('config-panico.jpeg'),
+          manualPdf: MANUAL_PDF,
+          sections: [
+            { title: 'Campos de configuração', content: 'Dígito (1–9, inserido entre o 3º e 4º dígito da senha), Tecla Controle (Power / A / B / C / Nenhum tipo), Tempo Controle (0 = desabilitado), Saída Acionada, Aviso Sonoro (Habilitado / Desabilitado), Desativação, Tempo Chaveiro', type: 'info' },
+            { title: 'Formas de acionamento', content: '1) Dígito de pânico na senha (XPE/XLT). 2) Tecla do controle pressionada por tempo configurado (XRE). 3) Chaveiro mantido sobre o leitor por tempo configurado (XPE/XLT). 4) Digital de pânico (todos os biométricos).', type: 'info' },
+            { title: 'Atenção', content: 'A função pânico está disponível apenas para usuários do tipo Morador. Prestadores de serviço e visitantes não conseguem acionar o pânico.', type: 'warning' },
+          ],
+        },
+      },
+      // 5.6 Mens. de Descanso
+      {
+        id: 'mip-config-sistema-msg-descanso',
+        label: 'Mens. de Descanso',
+        path: '/config-sistema/mensagem-descanso',
+        content: {
+          title: 'Mensagem de Descanso',
+          description: 'Define uma mensagem personalizada exibida no display do MIP, acima do nome do condomínio, quando o equipamento estiver na tela inicial/repouso.',
+          menuPath: 'Config. Sistema > Mens. de Descanso',
+          image: IMG('config-msg-descanso.jpeg'),
+          manualPdf: MANUAL_PDF,
+          sections: [{ title: 'Campo', content: 'Mensagem (máximo de 20 caracteres)', type: 'info' }],
+        },
+      },
+      // 5.7 Alerta Sonoro
+      {
+        id: 'mip-config-sistema-alerta-sonoro',
+        label: 'Alerta Sonoro',
+        path: '/config-sistema/alerta-sonoro',
+        content: {
+          title: 'Alerta Sonoro',
+          description: 'Habilita ou desabilita os alertas sonoros do MIP e dos dispositivos integrados (sons de confirmação e negação de acesso).',
+          menuPath: 'Config. Sistema > Alerta Sonoro',
+          image: IMG('config-alerta-sonoro.jpeg'),
+          manualPdf: MANUAL_PDF,
+          sections: [{ title: 'Campos', content: 'Alerta MIP (Habilitado / Desabilitado), Alerta dispositivos (Habilitado / Desabilitado)', type: 'info' }],
+        },
+      },
+      // 5.8 Rótulos
+      {
+        id: 'mip-config-sistema-rotulos',
+        label: 'Rótulos',
+        path: '/config-sistema/rotulos',
+        content: {
+          title: 'Rótulos',
+          description: 'Permite personalizar os nomes de campos exibidos nos menus de cadastro. Por exemplo: "Apto" pode ser renomeado para "Casa" em condomínios de casas; os níveis de permissão podem receber nomes como "Porteiro", "Síndico" ou "Instalador".',
+          menuPath: 'Config. Sistema > Rótulos',
+          image: IMG('config-rotulos.jpeg'),
+          manualPdf: MANUAL_PDF,
+          sections: [
+            { title: 'Rótulos configuráveis', content: 'Apto (máx. 4 caracteres), Nível 1 (máx. 10 caracteres), Nível 2, Nível 3, Nível 4, Chaveiro(s), Controle(s), Digital(is), Face(s)', type: 'info' },
+            { title: 'Exemplos de uso', content: '"Apto" → "Casa" (condomínio de casas). "Nível 1" → "Porteiro", "Nível 2" → "Síndico".', type: 'tip' },
+          ],
+        },
+      },
+    ],
+  },
+
+  // ── 6. FERIADOS ───────────────────────────────────────────────────────────
+  {
+    id: 'mip-feriados',
+    label: 'Feriados',
+    path: '/feriados',
+    content: {
+      title: 'Feriados',
+      description: 'Gerenciamento do calendário de feriados. O MIP já vem com os principais feriados nacionais configurados. É possível adicionar feriados personalizados (Carnaval, Sexta-feira Santa, Corpus Christi, datas municipais, etc.) e habilitar ou desabilitar cada um individualmente.',
+      menuPath: 'Menu Principal > Feriados',
+      image: IMG('feriados.jpeg'),
+      manualPdf: MANUAL_PDF,
+      sections: [
+        { title: 'Feriados nacionais pré-configurados', content: '01/01 Confraternização Universal, 21/04 Tiradentes, 01/05 Dia do Trabalho, 07/09 Independência, 12/10 N. Sra. Aparecida, 02/11 Finados, 15/11 Proclamação da República, 25/12 Natal', type: 'info' },
+        { title: 'Feriados móveis (sem data fixa)', content: 'Carnaval, Sexta-feira Santa e Corpus Christi são listados sem data (00/00) por serem feriados móveis. A data deve ser preenchida anualmente.', type: 'warning' },
+        { title: 'Adicionar feriado personalizado', content: 'Selecionar "-- / -- Adicionar" no final da lista. Campos: Data (DD/MM), Nome, Habilitar (Habilitado / Desabilitado).', type: 'info' },
+      ],
+    },
+  },
+];

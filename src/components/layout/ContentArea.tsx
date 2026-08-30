@@ -4,11 +4,13 @@ import { getMenuImage, welcomeImage } from '../../data/menuImages';
 import { SectionCard } from '../ui/SectionCard';
 import { EmptyState } from '../ui/EmptyState';
 import { MenuScreenshot } from '../ui/MenuScreenshot';
+import { MenuGallery } from '../ui/MenuGallery';
 import { NavigationButtons } from '../ui/NavigationButtons';
 
 interface ContentAreaProps {
   item: FlatMenuItem | null;
   modelLabel: string;
+  modelId?: string;
   modelImage?: string;
   prevItem: FlatMenuItem | null;
   nextItem: FlatMenuItem | null;
@@ -38,6 +40,7 @@ function WelcomeState({ modelLabel, modelImage }: { modelLabel: string; modelIma
 export function ContentArea({
   item,
   modelLabel,
+  modelId,
   modelImage,
   prevItem,
   nextItem,
@@ -54,6 +57,7 @@ export function ContentArea({
   const content = item.content;
   // Para manter retrocompatibilidade com o modelo anterior (SS 3542), usamos getMenuImage como fallback
   const screenshot = content?.image || getMenuImage(item.id);
+  const hasGallery = Boolean((content?.gallery && content.gallery.length > 0) || (content?.deviceGalleryOptions && content.deviceGalleryOptions.length > 0));
 
   return (
     <main className="flex-1 bg-[var(--brand-bg)] overflow-y-auto">
@@ -88,15 +92,19 @@ export function ContentArea({
 
         {/* Two column layout for image and sections */}
         <div className="mb-6 grid grid-cols-1 gap-6 lg:grid-cols-2 lg:gap-8">
-          {/* Device screenshot */}
-          {screenshot && (
+          {/* Device screenshot or Gallery */}
+          {hasGallery ? (
+            <div>
+              <MenuGallery gallery={content?.gallery ?? []} deviceOptions={content?.deviceGalleryOptions} />
+            </div>
+          ) : screenshot ? (
             <div>
               <MenuScreenshot
                 src={screenshot}
                 alt={`Tela do menu ${content?.title ?? item.label}`}
               />
             </div>
-          )}
+          ) : null}
 
           {/* Content sections */}
           <div className="flex flex-col gap-4">
@@ -112,17 +120,19 @@ export function ContentArea({
             
             {/* Manual Link Button */}
             <div className="flex flex-col gap-2 sm:flex-row">
-              <a
-                href={content?.manualWeb || content?.manualUrl || "https://manuais.intelbras.com.br/manual-interface-web-linha-bio-t/pt-BR/manual_unificado_web_2.0_pt-BR.html"}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-2 inline-flex items-center justify-center gap-2 px-4 py-3 bg-[var(--brand-primary)] text-white text-sm font-medium rounded-sm hover:bg-[var(--brand-primary-dark)] transition-colors flex-1"
-              >
-                Acessar Manual Web
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                </svg>
-              </a>
+              {modelId !== 'mip1000ip' && (
+                <a
+                  href={content?.manualWeb || content?.manualUrl || "https://manuais.intelbras.com.br/manual-interface-web-linha-bio-t/pt-BR/manual_unificado_web_2.0_pt-BR.html"}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-2 inline-flex items-center justify-center gap-2 px-4 py-3 bg-[var(--brand-primary)] text-white text-sm font-medium rounded-sm hover:bg-[var(--brand-primary-dark)] transition-colors flex-1"
+                >
+                  Acessar Manual Web
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                  </svg>
+                </a>
+              )}
               <a
                 href={content?.manualPdf || "https://backend.intelbras.com/sites/default/files/2023-11/manual-do-usuario-ss-3532-mf-w-ss-3542-mf-w-pt.pdf"}
                 target="_blank"

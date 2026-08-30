@@ -49,7 +49,9 @@ const typeConfig = {
  * Splits content into a vertical list when it contains comma-separated values.
  * Returns null if content should be rendered as plain text (short sentences, tips, warnings).
  */
-function parseListItems(content: string): string[] | null {
+function parseListItems(content: string | string[]): string[] | null {
+  if (Array.isArray(content)) return content;
+
   // Split by comma, ignoring commas inside parentheses
   const parts = content.split(/,\s*(?![^(]*\))/);
   if (parts.length < 2) return null;
@@ -109,7 +111,7 @@ export function SectionCard({ section }: SectionCardProps) {
             </ul>
           ) : (
             <p className={clsx('text-sm leading-relaxed whitespace-pre-line', config.textColor)}>
-              {section.content}
+              {section.content as string}
             </p>
           )}
         </div>

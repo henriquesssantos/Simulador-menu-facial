@@ -103,6 +103,7 @@ export function SimulatorPage({ model, onBack }: SimulatorPageProps) {
         <ContentArea
           item={activeItem}
           modelLabel={model.label}
+          modelId={model.id}
           modelImage={model.image}
           prevItem={prevItem}
           nextItem={nextItem}

@@ -1,7 +1,18 @@
 export interface Section {
   title?: string;
-  content: string;
+  content: string | string[];
   type?: 'info' | 'warning' | 'tip' | 'note';
+}
+
+export interface GalleryItem {
+  label: string;
+  image: string;
+}
+
+export interface DeviceGalleryOption {
+  value: string;
+  label: string;
+  gallery: GalleryItem[];
 }
 
 export interface PageContent {
@@ -9,6 +20,8 @@ export interface PageContent {
   description?: string;
   menuPath?: string;
   image?: string;
+  gallery?: GalleryItem[];
+  deviceGalleryOptions?: DeviceGalleryOption[];
   manualUrl?: string; // legacy
   manualPdf?: string;
   manualWeb?: string;
