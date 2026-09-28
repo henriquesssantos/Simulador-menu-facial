@@ -1,4 +1,4 @@
-import { MapPin } from 'lucide-react';
+ import { MapPin } from 'lucide-react';
 import type { FlatMenuItem, MenuItem } from '../../types/menu';
 import { getMenuImage, welcomeImage } from '../../data/menuImages';
 import { SectionCard } from '../ui/SectionCard';
