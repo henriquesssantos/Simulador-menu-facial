@@ -516,7 +516,7 @@ export const mip1000ipMenuTree: MenuItem[] = [
               image: IMG('dispositivo-excluir.jpeg'),
               manualPdf: MANUAL_PDF,
               sections: [
-                { title: 'Atenção', content: 'Ao excluir um dispositivo, todos os usuários perderão acesso a ele imediatamente. Se o dispositivo permanecer no barramento com firmware atualizado, poderá ser incluído novamente.', type: 'warning' },
+                { title: 'Atenção', content: 'Ao excluir um dispositivo todos os usuários perderão acesso a ele imediatamente. Se o dispositivo permanecer no barramento com firmware atualizado poderá ser incluído novamente.', type: 'warning' },
               ],
             },
           },
@@ -547,6 +547,13 @@ export const mip1000ipMenuTree: MenuItem[] = [
               menuPath: 'Cadastro > Chaveiro(s) > Incluir Novo',
               image: IMG('chaveiro-incluir.jpeg'),
               manualPdf: MANUAL_PDF,
+              gallery: [
+                { label: 'Buscar usuário', image: IMG('chaveiro-incluir-nome-buscar.png') },
+                { label: 'Escolher leitor', image: IMG('chaveiro-incluir-escolha-leitor.png') },
+                { label: 'Carro (Modelo)', image: IMG('chaveiro-incluir-carro-modelo.png') },
+                { label: 'Carro (Cor)', image: IMG('chaveiro-incluir-carro-cor.png') },
+                { label: 'Carro (Placa)', image: IMG('chaveiro-incluir-carro-placa.png') },
+              ],
               sections: [
                 { title: 'Leitores compatíveis para captura', content: 'MIP 1000 IP, XPE PLUS ID, XLT 1000 ID, CT 500 1P, CT 3000 2PB', type: 'info' },
                 { title: 'Dados opcionais do veículo', content: 'Carro (Modelo), Carro (Marca), Carro (Cor), Carro (Placa)', type: 'info' },
@@ -563,6 +570,15 @@ export const mip1000ipMenuTree: MenuItem[] = [
               menuPath: 'Cadastro > Chaveiro(s) > Editar',
               image: IMG('chaveiro-editar.jpeg'),
               manualPdf: MANUAL_PDF,
+              gallery: [
+                { label: 'Buscar usuário', image: IMG('chaveiro-editar-nome-buscar.png') },
+                { label: 'Selecionar chaveiro', image: IMG('chaveiro-editar-selecionar-chaveiro.png') },
+                { label: 'Código', image: IMG('chaveiro-editar-codigo.png') },
+                { label: 'Carro (Modelo)', image: IMG('chaveiro-editar-carro-modelo.png') },
+                { label: 'Carro (Marca)', image: IMG('chaveiro-editar-carro-marca.png') },
+                { label: 'Carro (Cor)', image: IMG('chaveiro-editar-carro-cor.png') },
+                { label: 'Carro (Placa)', image: IMG('chaveiro-editar-carro-placa.png') },
+              ],
               sections: [
                 { title: 'Campos editáveis', content: 'Código Hex do Chaveiro, Carro (Modelo), Carro (Marca), Carro (Cor), Carro (Placa)', type: 'info' },
               ],
@@ -578,6 +594,15 @@ export const mip1000ipMenuTree: MenuItem[] = [
               menuPath: 'Cadastro > Chaveiro(s) > Consultar',
               image: IMG('chaveiro-consultar.jpeg'),
               manualPdf: MANUAL_PDF,
+              gallery: [
+                { label: 'Buscar usuário', image: IMG('chaveiro-consultar-nome-buscar.png') },
+                { label: 'Chaveiros encontrados', image: IMG('chaveiro-editar-selecionar-chaveiro.png') },
+                { label: 'Código', image: IMG('chaveiro-consultar-codigo.png') },
+                { label: 'Carro (Modelo)', image: IMG('chaveiro-consultar-carro-modelo.png') },
+                { label: 'Carro (Marca)', image: IMG('chaveiro-consultar-carro-marca.png') },
+                { label: 'Carro (Cor)', image: IMG('chaveiro-consultar-carro-cor.png') },
+                { label: 'Carro (Placa)', image: IMG('chaveiro-consultar-carro-placa.png') },
+              ],
             },
           },
           {
@@ -590,6 +615,11 @@ export const mip1000ipMenuTree: MenuItem[] = [
               menuPath: 'Cadastro > Chaveiro(s) > Excluir',
               image: IMG('chaveiro-excluir.jpeg'),
               manualPdf: MANUAL_PDF,
+              gallery: [
+                { label: 'Buscar usuário', image: IMG('chaveiro-excluir-nome-buscar.png') },
+                { label: 'Selecionar chaveiro', image: IMG('chaveiro-editar-selecionar-chaveiro.png') },
+                { label: 'Confirmar exclusão', image: IMG('chaveiro-excluir-confirmacao.png') },
+              ],
               sections: [{ title: 'Confirmação', content: 'O sistema exibe "Tem certeza?" com o código do chaveiro. Pressione Enter para confirmar ou ESC para cancelar.', type: 'warning' }],
             },
           },
