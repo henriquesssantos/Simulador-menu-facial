@@ -1,8 +1,12 @@
-import type { MenuItem } from '../types/menu';
+import type { MenuItem, Section } from '../types/menu';
 
 const BASE_URL = import.meta.env.BASE_URL;
 const IMG = (name: string) => `${BASE_URL}imagens-mip1000ip/${encodeURI(name)}`;
 const MANUAL_PDF = 'https://backend.intelbras.com/sites/default/files/2022-06/manual-mip-1000-ip.pdf';
+const configTeclaSections = (tecla: string): Section[] => [
+  { title: 'Fluxo', content: `Configure ${tecla}, selecione um dispositivo cadastrado e escolha o acionamento. Use a seta para a direita para selecionar a saída disponível e pressione Enter para confirmar.`, type: 'info' },
+  { title: 'Tecla já configurada', content: 'Não é possível editar a configuração existente. Selecione Excluir e configure a tecla novamente; Voltar mantém a configuração atual.', type: 'note' },
+];
 
 export const mip1000ipMenuTree: MenuItem[] = [
   // ── 1. CADASTRO ──────────────────────────────────────────────────────────
@@ -856,11 +860,11 @@ export const mip1000ipMenuTree: MenuItem[] = [
       title: 'Eventos',
       description: 'Registros de todas as ocorrências do sistema: acessos liberados ou negados por senha, chaveiro, digital, face ou controle; pânicos, arrombamentos, tamperings, alertas de porteiro, carona e acionamentos remotos.',
       menuPath: 'Menu Principal > Eventos',
-      image: IMG('eventos.jpeg'),
+      image: IMG('eventos/menu.png'),
       manualPdf: MANUAL_PDF,
       sections: [
-        { title: 'Tipos de eventos registrados', content: 'Acesso liberado/negado (Senha, Chaveiro, Digital, Face, Controle), Acesso via Apto (XPE), Teclas AC, Acionamento Remoto (SGA), Pânico, Tamper, Arrombamento, Carona, Porteiro Alerta.', type: 'info' },
-        { title: 'Limite de exibição', content: 'Em todas as opções serão exibidos os últimos 26 eventos de seu respectivo filtro.', type: 'note' },
+        { title: 'Tipos de eventos registrados', content: 'Acessos por senha, apartamento, chaveiro, controle, digital e face; acionamentos por teclas AC e remotamente pelo SGA; pânico, tamper, arrombamento, carona e Porteiro Alerta.', type: 'info' },
+        { title: 'Limites', content: 'O MIP armazena até 30.000 eventos. As consultas Por usuário e Por dispositivo exibem os 26 registros mais recentes do filtro. Para Últimos eventos.', type: 'note' },
       ],
     },
     children: [
@@ -870,11 +874,14 @@ export const mip1000ipMenuTree: MenuItem[] = [
         path: '/eventos/ultimos',
         content: {
           title: 'Últimos Eventos',
-          description: 'Exibe os 26 eventos mais recentes de todo o sistema, independente do usuário ou dispositivo. Mostra data, hora, tipo do evento, usuário e dispositivo envolvido.',
+          description: 'Exibe os eventos mais recentes de todo o sistema, independente do usuário ou dispositivo. Mostra data, hora, tipo do evento, usuário e dispositivo envolvido.',
           menuPath: 'Eventos > Últimos eventos',
-          image: IMG('eventos-ultimos.jpeg'),
+          image: IMG('eventos/ultimos.png'),
           manualPdf: MANUAL_PDF,
-          sections: [{ title: 'Informações exibidas', content: 'Data e hora, Nome do usuário, Apto, Nome do dispositivo acionado, Tipo do evento (Acesso Liberado, Acesso Negado, Pânico, etc.)', type: 'info' }],
+          sections: [
+            { title: 'Informações exibidas', content: 'Data e hora, nome e tipo do usuário, apartamento, dispositivo e saída acionada, além do tipo de acesso ou evento. O manual ilustra “Acesso Liberado”.', type: 'info' },
+            { title: 'Limite', content: 'Consulta global dos registros mais recentes. O MIP armazena até 30.000 eventos; o manual não define uma quantidade exibida por vez nesta opção.', type: 'note' },
+          ],
         },
       },
       {
@@ -885,9 +892,15 @@ export const mip1000ipMenuTree: MenuItem[] = [
           title: 'Eventos por Usuário',
           description: 'Filtra e exibe os 26 últimos eventos de um usuário específico. A busca pode ser feita por nome ou número do apartamento.',
           menuPath: 'Eventos > Por usuário',
-          image: IMG('eventos-por-usuario.jpeg'),
+          gallery: [
+            { label: 'Buscar usuário por nome ou apartamento', image: IMG('eventos/usuario-busca.png') },
+            { label: 'Eventos encontrados para o usuário', image: IMG('eventos/usuario-resultado.png') },
+          ],
           manualPdf: MANUAL_PDF,
-          sections: [{ title: 'Busca', content: 'Localizar por Nome ou Apto', type: 'info' }],
+          sections: [
+            { title: 'Busca', content: 'Localizar por nome ou apartamento e pressionar Enter para consultar os eventos da pessoa.', type: 'info' },
+            { title: 'Eventos e limite', content: 'O resultado mostra data e hora, usuário, apartamento, dispositivo e tipo do evento (o manual exemplifica “Acesso liberado”). Use a tecla para baixo para percorrer os 26 últimos acessos desse usuário.', type: 'note' },
+          ],
         },
       },
       {
@@ -898,9 +911,12 @@ export const mip1000ipMenuTree: MenuItem[] = [
           title: 'Eventos por Dispositivo',
           description: 'Filtra e exibe os 26 últimos eventos de um dispositivo específico cadastrado no sistema.',
           menuPath: 'Eventos > Por dispositivo',
-          image: IMG('eventos-por-dispositivo.jpeg'),
+          image: IMG('eventos/dispositivo.png'),
           manualPdf: MANUAL_PDF,
-          sections: [{ title: 'Busca', content: 'Selecionar o nome do dispositivo na lista de dispositivos cadastrados.', type: 'info' }],
+          sections: [
+            { title: 'Busca', content: 'Selecionar o dispositivo na lista de dispositivos cadastrados.', type: 'info' },
+            { title: 'Eventos e limite', content: 'O resultado mostra data e hora, usuário, apartamento, dispositivo e tipo do evento (o manual exemplifica “Acesso liberado”). São exibidos os 26 últimos eventos desse dispositivo.', type: 'note' },
+          ],
         },
       },
     ],
@@ -915,9 +931,13 @@ export const mip1000ipMenuTree: MenuItem[] = [
       title: 'Notificações',
       description: 'Exibe alertas ativos do sistema: bateria baixa em controles remotos e dispositivos com timeout de comunicação no barramento RS-485. Quando o ícone de notificação aparece na tela inicial, pressione a tecla 2 para visualizá-las.',
       menuPath: 'Menu Principal > Notificações',
-      image: IMG('notificacoes.jpeg'),
+      image: IMG('notificacoes/menu.png'),
       manualPdf: MANUAL_PDF,
-      sections: [{ title: 'Acesso rápido', content: 'Na tela inicial do MIP, pressione a tecla 2 quando o ícone de notificação estiver visível para acessar os alertas do sistema.', type: 'tip' }],
+      sections: [
+        { title: 'Opções do menu', content: '1. Bateria Baixa: identifica o morador com controle de bateria fraca. 2. Dispositivo: lista dispositivos com problema.', type: 'info' },
+        { title: 'Limite', content: 'O manual não especifica uma quantidade máxima de notificações para nenhuma das opções. O contador 01/01 nas telas é apenas o exemplo ilustrado.', type: 'note' },
+        { title: 'Acesso rápido', content: 'Na tela inicial do MIP, pressione a tecla 2 quando o ícone de notificação estiver visível para acessar os alertas do sistema.', type: 'tip' },
+      ],
     },
     children: [
       {
@@ -928,9 +948,12 @@ export const mip1000ipMenuTree: MenuItem[] = [
           title: 'Bateria Baixa',
           description: 'Informa quais moradores possuem controles remotos XTR 1000 com nível de bateria baixo. Permite identificar rapidamente quais usuários precisam trocar a bateria.',
           menuPath: 'Notificações > Bateria baixa',
-          image: IMG('notificacoes-bateria-baixa.jpeg'),
+          image: IMG('notificacoes/bateria-baixa.png'),
           manualPdf: MANUAL_PDF,
-          sections: [{ title: 'Informações exibidas', content: 'Lista de moradores com o nome do dispositivo (controle) com bateria fraca.', type: 'info' }],
+          sections: [
+            { title: 'Informações exibidas', content: 'Mostra o morador que possui controle com bateria baixa. Se não houver ocorrências.', type: 'info' },
+            { title: 'Limite', content: 'O manual não define um máximo de moradores ou controles nessa lista; 01/01 é somente o contador da tela de exemplo.', type: 'note' },
+          ],
         },
       },
       {
@@ -941,10 +964,10 @@ export const mip1000ipMenuTree: MenuItem[] = [
           title: 'Notificações de Dispositivo',
           description: 'Mostra os dispositivos do barramento RS-485 que estão em estado de timeout — sem resposta ao MIP. Permite identificar equipamentos com falha de comunicação ou desligados.',
           menuPath: 'Notificações > Dispositivo',
-          image: IMG('notificacoes-dispositivo.jpeg'),
+          image: IMG('notificacoes/dispositivo.png'),
           manualPdf: MANUAL_PDF,
           sections: [
-            { title: 'Informações exibidas', content: 'Lista de dispositivos com timeout de comunicação, exibindo o nome do dispositivo.', type: 'info' },
+            { title: 'Informações exibidas', content: 'Lista os dispositivos com problema de comunicação; o manual exemplifica “TOut. XPE Portaria”.', type: 'info' },
             { title: 'Dica de suporte', content: 'Use o teste de barramento RS-485 (tecla 7 na tela inicial) para analisar a qualidade da comunicação com cada dispositivo e identificar a causa do timeout.', type: 'tip' },
           ],
         },
@@ -961,19 +984,24 @@ export const mip1000ipMenuTree: MenuItem[] = [
       title: 'Config. Teclas',
       description: 'Configura as teclas de acionamento rápido AC1 a AC5 do MIP 1000 IP. Cada tecla pode ser associada a um dispositivo cadastrado para acionamento direto pelo porteiro/vigilante, sem necessidade de autenticação.',
       menuPath: 'Menu Principal > Config. Teclas',
-      image: IMG('config-teclas.jpeg'),
+      gallery: [
+        { label: 'Selecionar Tecla AC1 a AC5', image: IMG('config-teclas/menu.png') },
+        { label: 'Selecionar dispositivo', image: IMG('config-teclas/dispositivo.png') },
+        { label: 'Selecionar acionamento e saída', image: IMG('config-teclas/acionamento.png') },
+        { label: 'Tecla configurada: Voltar ou Excluir', image: IMG('config-teclas/configurada.png') },
+      ],
       manualPdf: MANUAL_PDF,
       sections: [
-        { title: 'Teclas configuráveis', content: 'AC1, AC2, AC3, AC4, AC5', type: 'info' },
+        { title: 'Edição', content: 'Uma tecla configurada não pode ser editada: use Excluir e refaça a configuração. Use Voltar para sair sem alterar.', type: 'note' },
         { title: 'Registro de eventos', content: 'O acionamento via teclas AC gera evento registrado como "Tecla AC X — Dispositivo — Saída".', type: 'note' },
       ],
     },
     children: [
-      { id: 'mip-config-teclas-ac1', label: 'Tecla AC1', path: '/config-teclas/ac1', content: { title: 'Tecla AC1', description: 'Configura a tecla de acionamento rápido AC1, vinculando-a a um dispositivo cadastrado para acionamento direto pelo operador do MIP.', menuPath: 'Config. Teclas > Tecla AC1', image: IMG('config-tecla-ac1.jpeg'), manualPdf: MANUAL_PDF, sections: [{ title: 'Configuração', content: 'Selecionar o dispositivo cadastrado que será acionado ao pressionar a tecla AC1.', type: 'info' }] } },
-      { id: 'mip-config-teclas-ac2', label: 'Tecla AC2', path: '/config-teclas/ac2', content: { title: 'Tecla AC2', description: 'Configura a tecla de acionamento rápido AC2, vinculando-a a um dispositivo cadastrado.', menuPath: 'Config. Teclas > Tecla AC2', image: IMG('config-tecla-ac2.jpeg'), manualPdf: MANUAL_PDF } },
-      { id: 'mip-config-teclas-ac3', label: 'Tecla AC3', path: '/config-teclas/ac3', content: { title: 'Tecla AC3', description: 'Configura a tecla de acionamento rápido AC3, vinculando-a a um dispositivo cadastrado.', menuPath: 'Config. Teclas > Tecla AC3', image: IMG('config-tecla-ac3.jpeg'), manualPdf: MANUAL_PDF } },
-      { id: 'mip-config-teclas-ac4', label: 'Tecla AC4', path: '/config-teclas/ac4', content: { title: 'Tecla AC4', description: 'Configura a tecla de acionamento rápido AC4, vinculando-a a um dispositivo cadastrado.', menuPath: 'Config. Teclas > Tecla AC4', image: IMG('config-tecla-ac4.jpeg'), manualPdf: MANUAL_PDF } },
-      { id: 'mip-config-teclas-ac5', label: 'Tecla AC5', path: '/config-teclas/ac5', content: { title: 'Tecla AC5', description: 'Configura a tecla de acionamento rápido AC5, vinculando-a a um dispositivo cadastrado.', menuPath: 'Config. Teclas > Tecla AC5', image: IMG('config-tecla-ac5.jpeg'), manualPdf: MANUAL_PDF } },
+      { id: 'mip-config-teclas-ac1', label: 'Tecla AC1', path: '/config-teclas/ac1', content: { title: 'Tecla AC1', description: 'Configura a tecla de acionamento rápido AC1, vinculando-a a um dispositivo e a uma saída disponíveis.', menuPath: 'Config. Teclas > Tecla AC1', image: IMG('config-teclas/acionamento.png'), manualPdf: MANUAL_PDF, sections: configTeclaSections('AC1') } },
+      { id: 'mip-config-teclas-ac2', label: 'Tecla AC2', path: '/config-teclas/ac2', content: { title: 'Tecla AC2', description: 'Configura a tecla de acionamento rápido AC2, vinculando-a a um dispositivo e a uma saída disponíveis.', menuPath: 'Config. Teclas > Tecla AC2', image: IMG('config-teclas/acionamento.png'), manualPdf: MANUAL_PDF, sections: configTeclaSections('AC2') } },
+      { id: 'mip-config-teclas-ac3', label: 'Tecla AC3', path: '/config-teclas/ac3', content: { title: 'Tecla AC3', description: 'Configura a tecla de acionamento rápido AC3, vinculando-a a um dispositivo e a uma saída disponíveis.', menuPath: 'Config. Teclas > Tecla AC3', image: IMG('config-teclas/acionamento.png'), manualPdf: MANUAL_PDF, sections: configTeclaSections('AC3') } },
+      { id: 'mip-config-teclas-ac4', label: 'Tecla AC4', path: '/config-teclas/ac4', content: { title: 'Tecla AC4', description: 'Configura a tecla de acionamento rápido AC4, vinculando-a a um dispositivo e a uma saída disponíveis.', menuPath: 'Config. Teclas > Tecla AC4', image: IMG('config-teclas/acionamento.png'), manualPdf: MANUAL_PDF, sections: configTeclaSections('AC4') } },
+      { id: 'mip-config-teclas-ac5', label: 'Tecla AC5', path: '/config-teclas/ac5', content: { title: 'Tecla AC5', description: 'Configura a tecla de acionamento rápido AC5, vinculando-a a um dispositivo e a uma saída disponíveis.', menuPath: 'Config. Teclas > Tecla AC5', image: IMG('config-teclas/acionamento.png'), manualPdf: MANUAL_PDF, sections: configTeclaSections('AC5') } },
     ],
   },
 
