@@ -92,7 +92,7 @@ export function HomePage({ models, onSelect }: HomePageProps) {
                           RFID
                         </span>
                         <span className="flex items-center gap-1 text-xs text-[var(--brand-secondary)] bg-[var(--brand-highlight)] px-2 py-1 rounded-sm border border-[var(--brand-border)]/30">
-                          <Wifi size={10} />
+                          
                           
                         </span>
                       </div>
