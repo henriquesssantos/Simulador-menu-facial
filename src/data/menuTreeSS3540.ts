@@ -160,7 +160,7 @@ export const ss3540MenuTree: MenuItem[] = [
           sections: [
             {
               title: 'Configuração por usuário',
-              content: 'Ao ativar "Autenticação por usuário", é possível definir para cada usuário quais métodos são aceitos: Cartão, Impressão digital, Face, Senha — em modo /Ou (qualquer um) ou +E (combinação obrigatória).',
+              content: 'Ao ativar "Autenticação por usuário" é possível definir para cada usuário quais métodos são aceitos:, Cartão, Impressão digital, Face, Senha, — em modo /Ou (qualquer um) ou +E (combinação obrigatória).',
               type: 'tip',
             },
           ],
@@ -186,7 +186,7 @@ export const ss3540MenuTree: MenuItem[] = [
             },
             {
               title: 'Dica de suporte',
-              content: 'Se o cliente relatar alarme constante de intrusão sem violação, verifique se o Sensor de porta está configurado corretamente e se o sensor magnético está bem posicionado.',
+              content: 'Se o cliente relatar alarme constante de intrusão sem violação verifique se o Sensor de porta está configurado corretamente e se o sensor magnético está bem posicionado.',
               type: 'tip',
             },
           ],
@@ -258,11 +258,7 @@ export const ss3540MenuTree: MenuItem[] = [
                   content: 'Endereço de IP, Máscara de sub-rede, Gateway padrão, DHCP (Toggle ON/OFF)',
                   type: 'info',
                 },
-                {
-                  title: 'Dica de suporte',
-                  content: 'Para verificar o IP atual sem navegar neste menu, acesse Infor. Sistema, onde o Endereço IP é exibido diretamente.',
-                  type: 'tip',
-                },
+                
               ],
             },
           },
@@ -409,7 +405,7 @@ export const ss3540MenuTree: MenuItem[] = [
                 },
                 {
                   title: 'Dica de suporte',
-                  content: 'Se o cliente relatar horário incorreto nos eventos, verifique se o NTP está ativo e se o dispositivo tem acesso ao servidor na porta 123/UDP.',
+                  content: 'Se o cliente relatar horário incorreto nos eventos verifique se o NTP está ativo e se o dispositivo tem acesso ao servidor.',
                   type: 'tip',
                 },
               ],
@@ -450,11 +446,6 @@ export const ss3540MenuTree: MenuItem[] = [
               title: 'Parâmetros disponíveis',
               content: 'Limiar de detecção facial (padrão: 85), Máx. ângulo de reconhecimento, Distância pupilar, Tempo limite de reconhecimento (segundos), Tempo limite para acesso facial negado (segundos), Limiar anti-fake (Rigoroso/Normal/Desativado), Modo máscara (Detectar/Ignorar), Restrições da fotografia (Simples/Rigoroso)',
               type: 'info',
-            },
-            {
-              title: 'Dica de suporte',
-              content: 'Se o cliente reclamar de falha frequente no reconhecimento, reduza o Limiar de detecção facial para 80. Se reclamar de falsos positivos, aumente para 90 ou mais.',
-              type: 'tip',
             },
           ],
         },
@@ -581,11 +572,6 @@ export const ss3540MenuTree: MenuItem[] = [
               content: 'Gráfico de barras com 10 níveis. Ajuste via botões [-] e [+]. Um preview ao vivo da câmera é exibido para auxiliar na calibração.',
               type: 'info',
             },
-            {
-              title: 'Dica de suporte',
-              content: 'Se o reconhecimento falha em ambiente escuro, aumente a intensidade do infravermelho gradualmente. Nível muito alto pode causar saturação da imagem.',
-              type: 'tip',
-            },
           ],
         },
       },
@@ -650,7 +636,7 @@ export const ss3540MenuTree: MenuItem[] = [
           sections: [
             {
               title: 'Dica de suporte',
-              content: 'Em caso de comportamento anômalo, o reinício via menu é a forma mais segura de resolver sem perda de dados.',
+              content: 'Em caso de comportamento anômalo o reinício via menu é a forma mais segura de resolver sem perda de dados.',
               type: 'tip',
             },
           ],

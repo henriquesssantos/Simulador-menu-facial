@@ -111,14 +111,15 @@ export function SimulatorPage({ model, onBack }: SimulatorPageProps) {
         />
       </div>
 
-      {/* Back button */}
-      <button
-        onClick={onBack}
-        className="fixed bottom-5 right-5 flex items-center gap-2 px-4 py-2 bg-[var(--brand-bg)] border border-[var(--brand-border)]/30 rounded-sm text-sm text-[var(--brand-secondary)] hover:text-[var(--brand-primary)] hover:border-[var(--brand-primary)]/40 transition duration-200 z-50"
-      >
-        <LogOut size={14} />
-        Trocar modelo
-      </button>
+      <div className="flex shrink-0 justify-end border-t border-[var(--brand-border)]/30 bg-[var(--brand-bg)] px-5 py-2">
+        <button
+          onClick={onBack}
+          className="inline-flex items-center gap-2 px-4 py-2 border border-[var(--brand-border)]/30 rounded-sm text-sm text-[var(--brand-secondary)] hover:text-[var(--brand-primary)] hover:border-[var(--brand-primary)]/40 transition duration-200"
+        >
+          <LogOut size={14} />
+          Trocar modelo
+        </button>
+      </div>
     </div>
   );
 }

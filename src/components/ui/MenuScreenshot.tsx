@@ -23,15 +23,15 @@ export function MenuScreenshot({
           {caption}
         </figcaption>
       </div>
-      <div className="flex justify-center bg-brand-bg p-6 relative min-h-[300px]">
+      <div className="relative h-[600px] overflow-hidden bg-black/5">
         {!isLoaded && (
-          <Skeleton className="absolute w-[310px] h-[420px]" />
+          <Skeleton className="absolute inset-0 h-full w-full" />
         )}
         <img
           src={src}
           alt={alt}
           onLoad={() => setIsLoaded(true)}
-          className={`max-h-[550px] w-auto max-w-full rounded-sm ring-1 ring-black/5 transition-opacity duration-300 ${isLoaded ? 'opacity-100' : 'opacity-0'
+          className={`absolute inset-0 h-full w-full object-cover ring-1 ring-black/5 transition-opacity duration-300 ${isLoaded ? 'opacity-100' : 'opacity-0'
             }`}
           loading="lazy"
         />

@@ -255,11 +255,7 @@ export const ss3542MenuTree: MenuItem[] = [
                   content: 'Endereço IP, Máscara sub-rede, Gateway Padrão, DNS Principal, DNS Alternativo, DHCP (ON/OFF).',
                   type: 'info',
                 },
-                {
-                  title: 'Dica de suporte',
-                  content: 'Para verificar o IP atual sem acessar este menu, acesse Info Sistema > Versão do dispositivo onde o Endereço IP é exibido.',
-                  type: 'tip',
-                },
+                
               ],
             },
           },
@@ -381,7 +377,7 @@ export const ss3542MenuTree: MenuItem[] = [
                 },
                 {
                   title: 'Dica de suporte',
-                  content: 'Se o cliente reportar horário incorreto nos eventos, verifique se o NTP está ativo e se o dispositivo tem acesso ao servidor configurado na porta 123/UDP.',
+                  content: 'Se o cliente reportar horário incorreto nos eventos verifique se o NTP está ativo e se o dispositivo tem acesso ao servidor configurado.',
                   type: 'tip',
                 },
               ],
@@ -415,11 +411,7 @@ export const ss3542MenuTree: MenuItem[] = [
               content: 'Limiar de reconhecimento facial (padrão: 85), Ângulo máx. de reconhecimento (padrão: 30°), Tempo face cadastrada (segundos), Tempo face não cadastrada (segundos), Distância de reconhecimento (padrão: 1,5m), Nível anti-fake, Embelezamento (ON/OFF), Parâmetros da máscara, Reconhecimento de múltiplas faces (ON/OFF), Restrições da fotografia.',
               type: 'info',
             },
-            {
-              title: 'Dica de suporte',
-              content: 'Se o cliente reclamar de falha frequente no reconhecimento, tente reduzir o Limiar de reconhecimento facial para 80. Se reclamar de falsos positivos (abre para pessoas erradas), aumente para 90+.',
-              type: 'tip',
-            },
+            
           ],
         },
       },
@@ -451,7 +443,7 @@ export const ss3542MenuTree: MenuItem[] = [
           sections: [
             {
               title: 'Ajuste',
-              content: 'Nível limite ajustável via botões [-] e [+]. Padrão: nível 3. Quanto maior o nível, mais rígida a comparação biométrica.',
+              content: 'Nível limite ajustável via botões [-] e [+]. Padrão: nível 3. Quanto maior o nível mais rígida a comparação biométrica.',
               type: 'info',
             },
           ],
@@ -524,7 +516,7 @@ export const ss3542MenuTree: MenuItem[] = [
           sections: [
             {
               title: 'Dica de suporte',
-              content: 'Em caso de comportamento anômalo ou travamento do equipamento, o reinício via menu é a forma mais segura de resolver sem perda de dados.',
+              content: 'Em caso de comportamento anômalo ou travamento do equipamento o reinício via menu é a forma mais segura de resolver sem perda de dados.',
               type: 'tip',
             },
           ],
@@ -770,7 +762,7 @@ export const ss3542MenuTree: MenuItem[] = [
                 },
                 {
                   title: 'Dica de suporte',
-                  content: 'Se o cliente relatar alarme constante de tamper após instalação, verifique se o dispositivo está corretamente fixado e se o sensor traseiro está em contato com a superfície de montagem.',
+                  content: 'Se o cliente relatar alarme constante de tamper após instalação verifique se o dispositivo está corretamente fixado e se o sensor traseiro está em contato com a superfície de montagem.',
                   type: 'tip',
                 },
               ],
@@ -833,7 +825,7 @@ export const ss3542MenuTree: MenuItem[] = [
           sections: [
             {
               title: 'Atenção',
-              content: 'Ao ativar este modo, o controle de porta local é desabilitado. O dispositivo passa a funcionar apenas como terminal de leitura.',
+              content: 'Ao ativar este modo o controle de porta local é desabilitado. O dispositivo passa a funcionar apenas como terminal de leitura.',
               type: 'warning',
             },
           ],
